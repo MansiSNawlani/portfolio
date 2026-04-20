@@ -27,7 +27,15 @@ async function HeroSection() {
   }
   console.log("Profile data:", profile);
 
-  return <BackgroundRippleEffect />;
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden"
+    >
+      {/* Background Ripple Effect */}
+      <BackgroundRippleEffect rows={8} cols={27} cellSize={56} />
+    </section>
+  );
 }
 
 export default HeroSection;
