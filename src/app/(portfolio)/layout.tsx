@@ -7,6 +7,7 @@ import { Sidebar } from "lucide-react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import SidebarToggle from "@/components/SidebarToggle";
+import { FloatingDock } from "@/components/FloatingDock";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
