@@ -45,7 +45,7 @@ export function ProfileImage({
           <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
           <div className="absolute inset-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-ping" />
         </div>
-        <span className="text-xs font-medium">Online</span>
+        <span className="text-xs font-medium text-white">Online</span>
       </div>
 
       {/* Hover Overlay */}
