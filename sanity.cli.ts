@@ -13,8 +13,8 @@ console.log("dataset:", process.env.NEXT_PUBLIC_SANITY_DATASET);
 
 export default defineCliConfig({
   api: {
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   },
   typegen: {
     path: "src/**/*.{ts,tsx,js,jsx}", // glob pattern to your typescript files. Can also be an array of paths

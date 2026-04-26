@@ -4,7 +4,6 @@ import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { CHAT_PROFILE_QUERY_RESULT } from "../../../sanity.types";
 import { createSession } from "../../../actions/create-session";
 import { useSidebar } from "../ui/sidebar";
-import { use } from "react";
 
 // CHAT_PROFILE_QUERYResult
 function Chat({ profile }: { profile: CHAT_PROFILE_QUERY_RESULT | null }) {
