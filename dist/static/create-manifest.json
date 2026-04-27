@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-04-25T13:04:04.442Z",
+  "createdAt": "2026-04-26T13:55:35.368Z",
   "studioVersion": "5.21.0",
   "version": 3,
   "workspaces": [
@@ -16,7 +16,7 @@
       "schema": "5f90d000.create-schema.json",
       "subtitle": "Content Management System",
       "title": "NextGen Portfolio",
-      "tools": "025ad0d7.create-tools.json"
+      "tools": "b8318a37.create-tools.json"
     }
   ]
 }
