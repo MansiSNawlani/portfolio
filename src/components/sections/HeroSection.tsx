@@ -48,8 +48,8 @@ export async function HeroSection() {
                 <span className="text-primary">{profile.lastName}</span>
               </h1>
               {profile.headlineStaticText &&
-              profile.headlineAnimatedWords &&
-              profile.headlineAnimatedWords.length > 0 ? (
+                profile.headlineAnimatedWords &&
+                profile.headlineAnimatedWords.length > 0 ? (
                 <LayoutTextFlip
                   text={profile.headlineStaticText}
                   words={profile.headlineAnimatedWords}
@@ -85,16 +85,6 @@ export async function HeroSection() {
                       className="px-4 py-2 @md/hero:px-6 @md/hero:py-3 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base"
                     >
                       LinkedIn
-                    </Link>
-                  )}
-                  {profile.socialLinks.twitter && (
-                    <Link
-                      href={profile.socialLinks.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 @md/hero:px-6 @md/hero:py-3 rounded-lg border hover:bg-accent transition-colors text-sm @md/hero:text-base"
-                    >
-                      Twitter
                     </Link>
                   )}
                   {profile.socialLinks.website && (
