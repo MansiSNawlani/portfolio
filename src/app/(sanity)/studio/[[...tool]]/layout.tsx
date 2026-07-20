@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NextGen Portfolio Studio",
-  description: "NextGen Portfolio Studio",
+  title: "Mansi S. Nawlani | Software Engineer",
+  description: "Portfolio Studio",
 };
 
 function Layout({ children }: { children: React.ReactNode }) {
