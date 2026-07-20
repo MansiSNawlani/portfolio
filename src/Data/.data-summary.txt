@@ -8,14 +8,12 @@
 Data/
 ├── 📄 Data Files (NDJSON format)
 │   ├── achievements.ndjson      (2.4K) - 7 achievements & awards
-│   ├── blog.ndjson              (6.1K) - 6 blog posts
 │   ├── certifications.ndjson    (1.8K) - 5 certifications
 │   ├── contact.ndjson           (1.5K) - 3 sample contacts
 │   ├── education.ndjson         (1.0K) - 2 degrees
 │   ├── experience.ndjson        (4.7K) - 4 work positions
 │   ├── profile.ndjson           (1.8K) - 1 main profile
 │   ├── projects.ndjson          (7.1K) - 6 projects
-│   ├── services.ndjson          (5.1K) - 5 services
 │   ├── siteSettings.ndjson      (1.3K) - 1 site config
 │   ├── skills.ndjson            (4.1K) - 15 skills
 │   └── testimonials.ndjson      (2.9K) - 6 testimonials

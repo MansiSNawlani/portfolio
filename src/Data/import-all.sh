@@ -62,14 +62,11 @@ FILES=(
     "education.ndjson"
     "experience.ndjson"
     "projects.ndjson"
-    "blog.ndjson"
-    "services.ndjson"
     "achievements.ndjson"
     "certifications.ndjson"
     "testimonials.ndjson"
     "navigation.ndjson"
     "siteSettings.ndjson"
-    "contact.ndjson"
 )
 
 TOTAL=${#FILES[@]}

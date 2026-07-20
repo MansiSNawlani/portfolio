@@ -50,13 +50,13 @@ echo Starting import...
 echo.
 
 REM Import files in order
-set FILES=skills.ndjson profile.ndjson education.ndjson experience.ndjson projects.ndjson blog.ndjson services.ndjson achievements.ndjson certifications.ndjson testimonials.ndjson navigation.ndjson siteSettings.ndjson contact.ndjson
+set FILES=skills.ndjson profile.ndjson education.ndjson experience.ndjson projects.ndjson achievements.ndjson certifications.ndjson testimonials.ndjson navigation.ndjson siteSettings.ndjson 
 
 set COUNT=0
 for %%F in (%FILES%) do (
     set /a COUNT+=1
     if exist "%%F" (
-        echo [!COUNT!/13] Importing %%F...
+        echo [!COUNT!/10] Importing %%F...
         call sanity dataset import "%%F" "%DATASET%" --replace
         if errorlevel 1 (
             echo [ERROR] Failed to import %%F
