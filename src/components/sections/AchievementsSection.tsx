@@ -35,24 +35,28 @@ export async function AchievementsSection() {
     });
   };
 
+  // -700 text on light backgrounds and -400 on dark keep chips readable.
   const getTypeColor = (type: string | null | undefined) => {
-    if (!type) return "bg-gray-500/10 text-gray-500";
+    const neutral = "bg-muted text-muted-foreground";
+    if (!type) return neutral;
     const colors: Record<string, string> = {
-      award: "bg-yellow-500/10 text-yellow-500",
-      hackathon: "bg-purple-500/10 text-purple-500",
-      publication: "bg-blue-500/10 text-blue-500",
-      speaking: "bg-green-500/10 text-green-500",
-      "open-source": "bg-orange-500/10 text-orange-500",
-      milestone: "bg-pink-500/10 text-pink-500",
-      recognition: "bg-cyan-500/10 text-cyan-500",
-      other: "bg-gray-500/10 text-gray-500",
+      career: "bg-primary/10 text-primary",
+      award: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
+      hackathon: "bg-violet-500/10 text-violet-700 dark:text-violet-400",
+      publication: "bg-sky-500/10 text-sky-700 dark:text-sky-400",
+      speaking: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
+      "open-source": "bg-orange-500/10 text-orange-700 dark:text-orange-400",
+      milestone: "bg-primary/10 text-primary",
+      recognition: "bg-teal-500/10 text-teal-700 dark:text-teal-400",
+      other: neutral,
     };
-    return colors[type] || colors.other;
+    return colors[type] || neutral;
   };
 
   const getTypeLabel = (type: string | null | undefined) => {
     if (!type) return "Achievement";
     const labels: Record<string, string> = {
+      career: "Career",
       award: "Award",
       hackathon: "Hackathon Win",
       publication: "Publication",
@@ -145,7 +149,7 @@ export async function AchievementsSection() {
                       </div>
                     )}
 
-                    <div className="flex flex-col @xs/card:flex-row @xs/card:items-center gap-2 mb-3">
+                    <div className="flex flex-col items-start @xs/card:flex-row @xs/card:items-center gap-2 mb-3">
                       {achievement.type && (
                         <span
                           className={`px-2.5 py-1 text-xs rounded-full font-medium ${getTypeColor(

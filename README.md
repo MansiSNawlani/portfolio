@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# mansisn.com
 
-## Getting Started
+Personal portfolio of Mansi S. Nawlani, Software Engineer. Live at [mansisn.com](https://mansisn.com).
 
-First, run the development server:
+The site pulls all of its content (profile, experience, projects, skills, certifications) from Sanity CMS, and includes an AI twin that visitors can chat with after signing in.
+
+## Tech stack
+
+- **Framework:** Next.js 16 (App Router), React 19, TypeScript
+- **Styling:** Tailwind CSS 4, shadcn/ui, Motion
+- **Content:** Sanity CMS, with an embedded Studio at `/studio`
+- **Auth:** Clerk (sign-in for the AI chat)
+- **AI chat:** OpenAI ChatKit / AgentKit
+- **Tooling:** pnpm, Biome (lint and format)
+
+## Getting started
+
+Requires Node.js 20+ and pnpm.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+# create .env.local with the variables listed below
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) for the site and [http://localhost:3000/studio](http://localhost:3000/studio) for the CMS.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local` in the project root:
 
-## Learn More
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project ID |
+| `NEXT_PUBLIC_SANITY_DATASET` | Sanity dataset, e.g. `production` or `develop` |
+| `NEXT_PUBLIC_SANITY_STUDIO_URL` | URL of the Studio, used for visual editing |
+| `SANITY_API_TOKEN` | Sanity token with write access (contact form, server actions) |
+| `SANITY_VIEWER_TOKEN` | Sanity token with read access to drafts (preview mode) |
+| `SANITY_STUDIO_PREVIEW_ORIGIN` | Site origin the Studio previews |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key |
+| `CLERK_SECRET_KEY` | Clerk secret key |
+| `OPENAI_API_KEY` | OpenAI key for the AI twin |
+| `NEXT_PUBLIC_CHATKIT_WORKFLOW_ID` | ChatKit workflow ID for the AI twin |
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command | What it does |
+| --- | --- |
+| `pnpm dev` | Start the dev server |
+| `pnpm build` | Production build |
+| `pnpm start` | Serve the production build |
+| `pnpm lint` | Check code with Biome |
+| `pnpm format` | Format code with Biome |
+| `pnpm typegen` | Regenerate TypeScript types from the Sanity schema and queries (run after changing a schema or a GROQ query) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
 
-## Deploy on Vercel
+```
+src/
+  app/(portfolio)/        Site layout, home page, Open Graph image
+  app/(sanity)/studio/    Embedded Sanity Studio
+  app/actions/            Server actions (contact form, chat session)
+  components/sections/    One component per page section (Hero, About, Experience, …)
+  components/ui/          Shared UI components
+  sanity/schemaTypes/     Sanity content schemas
+  Data/                   Seed content as .ndjson files, plus import scripts
+prompts/                  System prompts for the AI twin and its guardrail agents
+public/                   Static assets (favicon, world map)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Editing content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All visible content is edited in the Studio at `/studio`. Changes appear on the site without redeploying.
+
+`src/Data/` holds seed data for setting up a fresh dataset (see `src/Data/README.md`). Importing with `--replace` overwrites existing documents, so don't re-import into a dataset you've already edited in the Studio.
+
+## Deployment
+
+Deployed on Vercel. Set the environment variables above in the Vercel project settings, then deploy from `main`.

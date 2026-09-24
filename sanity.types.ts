@@ -233,6 +233,7 @@ export type Achievement = {
   _rev: string;
   title?: string;
   type?:
+    | "career"
     | "award"
     | "hackathon"
     | "publication"
@@ -1052,6 +1053,7 @@ export type ACHIEVEMENTS_QUERY_RESULT = Array<{
   title: string | null;
   type:
     | "award"
+    | "career"
     | "hackathon"
     | "milestone"
     | "open-source"

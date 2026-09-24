@@ -17,6 +17,7 @@ export default defineType({
       type: "string",
       options: {
         list: [
+          { title: "Career Milestone", value: "career" },
           { title: "Award", value: "award" },
           { title: "Hackathon Win", value: "hackathon" },
           { title: "Publication", value: "publication" },
