@@ -1,6 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import { SanityLive } from "@/sanity/lib/live";
 import "../globals.css";
 import { draftMode } from "next/headers";
@@ -11,8 +11,8 @@ import { ModeToggle } from "@/components/DarkModeToggle";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { FloatingDock } from "@/components/FloatingDock";
 import SidebarToggle from "@/components/SidebarToggle";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,11 +24,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-display",
+  subsets: ["latin"],
+});
+
+const siteTitle = "Mansi S. Nawlani | Software Engineer";
+const siteDescription =
+  "Senior Software Engineer specializing in React, Angular, TypeScript, .NET, and AI-powered applications.";
+
 export const metadata: Metadata = {
-  title: "Mansi S. Nawlani | Software Engineer",
-  description: "Senior Software Engineer specializing in React, Angular, TypeScript, .NET, and AI-powered applications.",
+  metadataBase: new URL("https://mansisn.com"),
+  title: siteTitle,
+  description: siteDescription,
   icons: {
     icon: "/favicon.ico",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Mansi S. Nawlani",
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
   },
 };
 
@@ -39,10 +61,14 @@ export default async function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+      {/* Font variables live on <html> because globals.css applies
+          font-sans there; on <body> they'd be undefined at that level. */}
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable}`}
+      >
+        <body className="antialiased">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

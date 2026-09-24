@@ -24,11 +24,11 @@
 {"_type":"skill","_id":"skill-n8n","name":"n8n","category":"devops","proficiency":"intermediate","percentage":75,"yearsOfExperience":1,"color":"#EA4B71"}
 {"_type":"skill","_id":"skill-git","name":"Git","category":"tools","proficiency":"expert","percentage":94,"yearsOfExperience":8,"color":"#F05032"}
 {"_type":"skill","_id":"skill-sanity","name":"Sanity CMS","category":"tools","proficiency":"intermediate","percentage":70,"yearsOfExperience":1,"color":"#F03E2F"}
-{"_type":"skill","_id":"skill-mcp","name":"Model Context Protocol (MCP)","category":"backend","proficiency":"intermediate","percentage":75,"yearsOfExperience":1,"color":"#7C3AED"}
-{"_type":"skill","_id":"skill-openai-agentkit","name":"OpenAI AgentKit","category":"backend","proficiency":"intermediate","percentage":75,"yearsOfExperience":1,"color":"#10A37F"}
-{"_type":"skill","_id":"skill-claude","name":"Claude API / Anthropic","category":"backend","proficiency":"intermediate","percentage":72,"yearsOfExperience":1,"color":"#D97706"}
-{"_type":"skill","_id":"skill-prompt-engineering","name":"Prompt Engineering","category":"backend","proficiency":"advanced","percentage":82,"yearsOfExperience":2,"color":"#8B5CF6"}
-{"_type":"skill","_id":"skill-ai-agents","name":"AI Agents","category":"backend","proficiency":"intermediate","percentage":78,"yearsOfExperience":1,"color":"#14B8A6"}
+{"_type":"skill","_id":"skill-mcp","name":"Model Context Protocol (MCP)","category":"ai-ml","proficiency":"intermediate","percentage":75,"yearsOfExperience":1,"color":"#7C3AED"}
+{"_type":"skill","_id":"skill-openai-agentkit","name":"OpenAI AgentKit","category":"ai-ml","proficiency":"intermediate","percentage":75,"yearsOfExperience":1,"color":"#10A37F"}
+{"_type":"skill","_id":"skill-claude","name":"Claude API / Anthropic","category":"ai-ml","proficiency":"intermediate","percentage":72,"yearsOfExperience":1,"color":"#D97706"}
+{"_type":"skill","_id":"skill-prompt-engineering","name":"Prompt Engineering","category":"ai-ml","proficiency":"advanced","percentage":82,"yearsOfExperience":2,"color":"#8B5CF6"}
+{"_type":"skill","_id":"skill-ai-agents","name":"AI Agents","category":"ai-ml","proficiency":"intermediate","percentage":78,"yearsOfExperience":1,"color":"#14B8A6"}
 {"_type":"skill","_id":"skill-jest","name":"Jest","category":"testing","proficiency":"advanced","percentage":84,"yearsOfExperience":3,"color":"#C21325"}
 {"_type":"skill","_id":"skill-sqlserver","name":"SQL Server","category":"database","proficiency":"advanced","percentage":83,"yearsOfExperience":4,"color":"#CC2927"}
 {"_type":"skill","_id":"skill-mongodb","name":"MongoDB","category":"database","proficiency":"intermediate","percentage":70,"yearsOfExperience":2,"color":"#47A248"}

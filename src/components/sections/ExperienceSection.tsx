@@ -3,6 +3,7 @@ import Image from "next/image";
 import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SectionHeading } from "./SectionHeading";
 
 const EXPERIENCE_QUERY =
   defineQuery(`*[_type == "experience"] | order(startDate desc){
@@ -36,16 +37,12 @@ export async function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="py-20 px-6">
+    <section id="experience" className="py-20 px-6 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Work Experience
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            My professional journey
-          </p>
-        </div>
+        <SectionHeading
+          title="Experience"
+          description="Nearly eight years across banking and customer experience."
+        />
 
         <div className="space-y-8">
           {experiences.map((exp) => (

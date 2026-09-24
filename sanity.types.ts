@@ -211,15 +211,15 @@ export type Blog = {
     _type: "image";
   };
   category?:
-  | "tutorial"
-  | "technical"
-  | "ai-ml"
-  | "web-dev"
-  | "career"
-  | "opinion"
-  | "showcase"
-  | "best-practices"
-  | "news";
+    | "tutorial"
+    | "technical"
+    | "ai-ml"
+    | "web-dev"
+    | "career"
+    | "opinion"
+    | "showcase"
+    | "best-practices"
+    | "news";
   tags?: Array<string>;
   publishedAt?: string;
   readTime?: number;
@@ -233,14 +233,14 @@ export type Achievement = {
   _rev: string;
   title?: string;
   type?:
-  | "award"
-  | "hackathon"
-  | "publication"
-  | "speaking"
-  | "open-source"
-  | "milestone"
-  | "recognition"
-  | "other";
+    | "award"
+    | "hackathon"
+    | "publication"
+    | "speaking"
+    | "open-source"
+    | "milestone"
+    | "recognition"
+    | "other";
   issuer?: string;
   date?: string;
   description?: string;
@@ -351,11 +351,11 @@ export type Experience = {
   company?: string;
   position?: string;
   employmentType?:
-  | "full-time"
-  | "part-time"
-  | "contract"
-  | "freelance"
-  | "internship";
+    | "full-time"
+    | "part-time"
+    | "contract"
+    | "freelance"
+    | "internship";
   location?: string;
   startDate?: string;
   endDate?: string;
@@ -405,18 +405,18 @@ export type Skill = {
   _rev: string;
   name?: string;
   category?:
-  | "frontend"
-  | "backend"
-  | "ai-ml"
-  | "devops"
-  | "database"
-  | "mobile"
-  | "cloud"
-  | "testing"
-  | "design"
-  | "tools"
-  | "soft-skills"
-  | "other";
+    | "frontend"
+    | "backend"
+    | "ai-ml"
+    | "devops"
+    | "database"
+    | "mobile"
+    | "cloud"
+    | "testing"
+    | "design"
+    | "tools"
+    | "soft-skills"
+    | "other";
   proficiency?: "beginner" | "intermediate" | "advanced" | "expert";
   percentage?: number;
   yearsOfExperience?: number;
@@ -446,21 +446,28 @@ export type Project = {
     } & SkillReference
   >;
   category?:
-  | "web-app"
-  | "mobile-app"
-  | "ai-ml"
-  | "api-backend"
-  | "devops"
-  | "open-source"
-  | "cli-tool"
-  | "desktop-app"
-  | "browser-extension"
-  | "game"
-  | "other";
+    | "web-app"
+    | "mobile-app"
+    | "ai-ml"
+    | "api-backend"
+    | "devops"
+    | "open-source"
+    | "cli-tool"
+    | "desktop-app"
+    | "browser-extension"
+    | "game"
+    | "other";
   liveUrl?: string;
   githubUrl?: string;
   featured?: boolean;
   order?: number;
+};
+
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
 };
 
 export type Profile = {
@@ -510,6 +517,17 @@ export type Profile = {
     github?: string;
     linkedin?: string;
     website?: string;
+  };
+  workAuthorization?: string;
+  languages?: Array<{
+    name?: string;
+    level?: string;
+    _key: string;
+  }>;
+  resume?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
   };
   yearsOfExperience?: number;
   stats?: Array<{
@@ -634,6 +652,7 @@ export type AllSanitySchemaTypes =
   | Experience
   | Skill
   | Project
+  | SanityFileAssetReference
   | Profile
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -659,286 +678,286 @@ export type NAVIGATION_QUERY_RESULT = Array<{
 // Query: *[_id == "singleton-profile"][0]{    _id,    _type,    _createdAt,    _updatedAt,    _rev,    firstName,    lastName,    headline,    shortBio,    email,    phone,    location,    availability,    socialLinks,    yearsOfExperience,    profileImage  }
 export type CHAT_PROFILE_QUERY_RESULT =
   | {
-    _id: "singleton-profile";
-    _type: "achievement";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "achievement";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "blog";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "blog";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "certification";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "certification";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "contact";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: string | null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "contact";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: string | null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "education";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "education";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "experience";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: string | null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "experience";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: string | null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "navigation";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "navigation";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "profile";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: string | null;
-    lastName: string | null;
-    headline: string | null;
-    shortBio: string | null;
-    email: string | null;
-    phone: string | null;
-    location: string | null;
-    availability: "available" | "open" | "unavailable" | null;
-    socialLinks: {
-      github?: string;
-      linkedin?: string;
-      website?: string;
-    } | null;
-    yearsOfExperience: number | null;
-    profileImage: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    } | null;
-  }
+      _id: "singleton-profile";
+      _type: "profile";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: string | null;
+      lastName: string | null;
+      headline: string | null;
+      shortBio: string | null;
+      email: string | null;
+      phone: string | null;
+      location: string | null;
+      availability: "available" | "open" | "unavailable" | null;
+      socialLinks: {
+        github?: string;
+        linkedin?: string;
+        website?: string;
+      } | null;
+      yearsOfExperience: number | null;
+      profileImage: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "project";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "project";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "sanity.fileAsset";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "sanity.fileAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "sanity.imageAsset";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "service";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "service";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "siteSettings";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "siteSettings";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "skill";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: number | null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "skill";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: number | null;
+      profileImage: null;
+    }
   | {
-    _id: "singleton-profile";
-    _type: "testimonial";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    firstName: null;
-    lastName: null;
-    headline: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      _id: "singleton-profile";
+      _type: "testimonial";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      firstName: null;
+      lastName: null;
+      headline: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+    }
   | null;
 
 // Source: src/components/sections/AboutSection.tsx
@@ -946,84 +965,84 @@ export type CHAT_PROFILE_QUERY_RESULT =
 // Query: *[_id == "singleton-profile"][0]{  firstName,  lastName,  fullBio,  yearsOfExperience,  stats,  email,  phone,  location}
 export type ABOUT_QUERY_RESULT =
   | {
-    firstName: null;
-    lastName: null;
-    fullBio: null;
-    yearsOfExperience: null;
-    stats: null;
-    email: null;
-    phone: null;
-    location: null;
-  }
+      firstName: null;
+      lastName: null;
+      fullBio: null;
+      yearsOfExperience: null;
+      stats: null;
+      email: null;
+      phone: null;
+      location: null;
+    }
   | {
-    firstName: null;
-    lastName: null;
-    fullBio: null;
-    yearsOfExperience: number | null;
-    stats: null;
-    email: null;
-    phone: null;
-    location: null;
-  }
+      firstName: null;
+      lastName: null;
+      fullBio: null;
+      yearsOfExperience: number | null;
+      stats: null;
+      email: null;
+      phone: null;
+      location: null;
+    }
   | {
-    firstName: null;
-    lastName: null;
-    fullBio: null;
-    yearsOfExperience: null;
-    stats: null;
-    email: null;
-    phone: null;
-    location: string | null;
-  }
+      firstName: null;
+      lastName: null;
+      fullBio: null;
+      yearsOfExperience: null;
+      stats: null;
+      email: null;
+      phone: null;
+      location: string | null;
+    }
   | {
-    firstName: null;
-    lastName: null;
-    fullBio: null;
-    yearsOfExperience: null;
-    stats: null;
-    email: string | null;
-    phone: null;
-    location: null;
-  }
+      firstName: null;
+      lastName: null;
+      fullBio: null;
+      yearsOfExperience: null;
+      stats: null;
+      email: string | null;
+      phone: null;
+      location: null;
+    }
   | {
-    firstName: string | null;
-    lastName: string | null;
-    fullBio: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
+      firstName: string | null;
+      lastName: string | null;
+      fullBio: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "blockquote"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
         _key: string;
-      }>;
-      style?:
-      | "blockquote"
-      | "h1"
-      | "h2"
-      | "h3"
-      | "h4"
-      | "h5"
-      | "h6"
-      | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
+      }> | null;
+      yearsOfExperience: number | null;
+      stats: Array<{
+        label?: string;
+        value?: string;
         _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-    yearsOfExperience: number | null;
-    stats: Array<{
-      label?: string;
-      value?: string;
-      _key: string;
-    }> | null;
-    email: string | null;
-    phone: string | null;
-    location: string | null;
-  }
+      }> | null;
+      email: string | null;
+      phone: string | null;
+      location: string | null;
+    }
   | null;
 
 // Source: src/components/sections/AchievementsSection.tsx
@@ -1032,15 +1051,15 @@ export type ABOUT_QUERY_RESULT =
 export type ACHIEVEMENTS_QUERY_RESULT = Array<{
   title: string | null;
   type:
-  | "award"
-  | "hackathon"
-  | "milestone"
-  | "open-source"
-  | "other"
-  | "publication"
-  | "recognition"
-  | "speaking"
-  | null;
+    | "award"
+    | "hackathon"
+    | "milestone"
+    | "open-source"
+    | "other"
+    | "publication"
+    | "recognition"
+    | "speaking"
+    | null;
   issuer: string | null;
   date: string | null;
   description: string | null;
@@ -1054,37 +1073,6 @@ export type ACHIEVEMENTS_QUERY_RESULT = Array<{
   url: string | null;
   featured: boolean | null;
   order: number | null;
-}>;
-
-// Source: src/components/sections/BlogSection.tsx
-// Variable: BLOG_QUERY
-// Query: *[_type == "blog"] | order(publishedAt desc){  title,  slug,  excerpt,  category,  tags,  publishedAt,  readTime,  featuredImage}
-export type BLOG_QUERY_RESULT = Array<{
-  title: string | null;
-  slug: Slug | null;
-  excerpt: string | null;
-  category:
-  | "ai-ml"
-  | "best-practices"
-  | "career"
-  | "news"
-  | "opinion"
-  | "showcase"
-  | "technical"
-  | "tutorial"
-  | "web-dev"
-  | null;
-  tags: Array<string> | null;
-  publishedAt: string | null;
-  readTime: number | null;
-  featuredImage: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
 }>;
 
 // Source: src/components/sections/CertificationsSection.tsx
@@ -1108,19 +1096,19 @@ export type CERTIFICATIONS_QUERY_RESULT = Array<{
   skills: Array<{
     name: string | null;
     category:
-    | "ai-ml"
-    | "backend"
-    | "cloud"
-    | "database"
-    | "design"
-    | "devops"
-    | "frontend"
-    | "mobile"
-    | "other"
-    | "soft-skills"
-    | "testing"
-    | "tools"
-    | null;
+      | "ai-ml"
+      | "backend"
+      | "cloud"
+      | "database"
+      | "design"
+      | "devops"
+      | "frontend"
+      | "mobile"
+      | "other"
+      | "soft-skills"
+      | "testing"
+      | "tools"
+      | null;
   }> | null;
   order: number | null;
 }>;
@@ -1130,33 +1118,33 @@ export type CERTIFICATIONS_QUERY_RESULT = Array<{
 // Query: *[_id == "singleton-profile"][0]{  email,  phone,  location,  socialLinks}
 export type PROFILE_QUERY_RESULT =
   | {
-    email: null;
-    phone: null;
-    location: null;
-    socialLinks: null;
-  }
+      email: null;
+      phone: null;
+      location: null;
+      socialLinks: null;
+    }
   | {
-    email: null;
-    phone: null;
-    location: string | null;
-    socialLinks: null;
-  }
+      email: null;
+      phone: null;
+      location: string | null;
+      socialLinks: null;
+    }
   | {
-    email: string | null;
-    phone: null;
-    location: null;
-    socialLinks: null;
-  }
+      email: string | null;
+      phone: null;
+      location: null;
+      socialLinks: null;
+    }
   | {
-    email: string | null;
-    phone: string | null;
-    location: string | null;
-    socialLinks: {
-      github?: string;
-      linkedin?: string;
-      website?: string;
-    } | null;
-  }
+      email: string | null;
+      phone: string | null;
+      location: string | null;
+      socialLinks: {
+        github?: string;
+        linkedin?: string;
+        website?: string;
+      } | null;
+    }
   | null;
 
 // Source: src/components/sections/EducationSection.tsx
@@ -1190,12 +1178,12 @@ export type EXPERIENCE_QUERY_RESULT = Array<{
   company: string | null;
   position: string | null;
   employmentType:
-  | "contract"
-  | "freelance"
-  | "full-time"
-  | "internship"
-  | "part-time"
-  | null;
+    | "contract"
+    | "freelance"
+    | "full-time"
+    | "internship"
+    | "part-time"
+    | null;
   location: string | null;
   startDate: string | null;
   endDate: string | null;
@@ -1223,19 +1211,19 @@ export type EXPERIENCE_QUERY_RESULT = Array<{
   technologies: Array<{
     name: string | null;
     category:
-    | "ai-ml"
-    | "backend"
-    | "cloud"
-    | "database"
-    | "design"
-    | "devops"
-    | "frontend"
-    | "mobile"
-    | "other"
-    | "soft-skills"
-    | "testing"
-    | "tools"
-    | null;
+      | "ai-ml"
+      | "backend"
+      | "cloud"
+      | "database"
+      | "design"
+      | "devops"
+      | "frontend"
+      | "mobile"
+      | "other"
+      | "soft-skills"
+      | "testing"
+      | "tools"
+      | null;
   }> | null;
   companyLogo: {
     asset?: SanityImageAssetReference;
@@ -1250,99 +1238,118 @@ export type EXPERIENCE_QUERY_RESULT = Array<{
 
 // Source: src/components/sections/HeroSection.tsx
 // Variable: HERO_QUERY
-// Query: *[_id == "singleton-profile"][0]{  firstName,  lastName,  headline,  headlineStaticText,  headlineAnimatedWords,  headlineAnimationDuration,  shortBio,  email,  phone,  location,  availability,  socialLinks,  yearsOfExperience,  profileImage}
+// Query: *[_id == "singleton-profile"][0]{  firstName,  lastName,  headline,  headlineStaticText,  headlineAnimatedWords,  headlineAnimationDuration,  shortBio,  email,  phone,  location,  availability,  socialLinks,  yearsOfExperience,  profileImage,  workAuthorization,  languages,  "resumeUrl": resume.asset->url}
 export type HERO_QUERY_RESULT =
   | {
-    firstName: null;
-    lastName: null;
-    headline: null;
-    headlineStaticText: null;
-    headlineAnimatedWords: null;
-    headlineAnimationDuration: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      firstName: null;
+      lastName: null;
+      headline: null;
+      headlineStaticText: null;
+      headlineAnimatedWords: null;
+      headlineAnimationDuration: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+      workAuthorization: null;
+      languages: null;
+      resumeUrl: null;
+    }
   | {
-    firstName: null;
-    lastName: null;
-    headline: null;
-    headlineStaticText: null;
-    headlineAnimatedWords: null;
-    headlineAnimationDuration: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: number | null;
-    profileImage: null;
-  }
+      firstName: null;
+      lastName: null;
+      headline: null;
+      headlineStaticText: null;
+      headlineAnimatedWords: null;
+      headlineAnimationDuration: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: number | null;
+      profileImage: null;
+      workAuthorization: null;
+      languages: null;
+      resumeUrl: null;
+    }
   | {
-    firstName: null;
-    lastName: null;
-    headline: null;
-    headlineStaticText: null;
-    headlineAnimatedWords: null;
-    headlineAnimationDuration: null;
-    shortBio: null;
-    email: null;
-    phone: null;
-    location: string | null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      firstName: null;
+      lastName: null;
+      headline: null;
+      headlineStaticText: null;
+      headlineAnimatedWords: null;
+      headlineAnimationDuration: null;
+      shortBio: null;
+      email: null;
+      phone: null;
+      location: string | null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+      workAuthorization: null;
+      languages: null;
+      resumeUrl: null;
+    }
   | {
-    firstName: null;
-    lastName: null;
-    headline: null;
-    headlineStaticText: null;
-    headlineAnimatedWords: null;
-    headlineAnimationDuration: null;
-    shortBio: null;
-    email: string | null;
-    phone: null;
-    location: null;
-    availability: null;
-    socialLinks: null;
-    yearsOfExperience: null;
-    profileImage: null;
-  }
+      firstName: null;
+      lastName: null;
+      headline: null;
+      headlineStaticText: null;
+      headlineAnimatedWords: null;
+      headlineAnimationDuration: null;
+      shortBio: null;
+      email: string | null;
+      phone: null;
+      location: null;
+      availability: null;
+      socialLinks: null;
+      yearsOfExperience: null;
+      profileImage: null;
+      workAuthorization: null;
+      languages: null;
+      resumeUrl: null;
+    }
   | {
-    firstName: string | null;
-    lastName: string | null;
-    headline: string | null;
-    headlineStaticText: string | null;
-    headlineAnimatedWords: Array<string> | null;
-    headlineAnimationDuration: number | null;
-    shortBio: string | null;
-    email: string | null;
-    phone: string | null;
-    location: string | null;
-    availability: "available" | "open" | "unavailable" | null;
-    socialLinks: {
-      github?: string;
-      linkedin?: string;
-      website?: string;
-    } | null;
-    yearsOfExperience: number | null;
-    profileImage: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    } | null;
-  }
+      firstName: string | null;
+      lastName: string | null;
+      headline: string | null;
+      headlineStaticText: string | null;
+      headlineAnimatedWords: Array<string> | null;
+      headlineAnimationDuration: number | null;
+      shortBio: string | null;
+      email: string | null;
+      phone: string | null;
+      location: string | null;
+      availability: "available" | "open" | "unavailable" | null;
+      socialLinks: {
+        github?: string;
+        linkedin?: string;
+        website?: string;
+      } | null;
+      yearsOfExperience: number | null;
+      profileImage: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      workAuthorization: string | null;
+      languages: Array<{
+        name?: string;
+        level?: string;
+        _key: string;
+      }> | null;
+      resumeUrl: string | null;
+    }
   | null;
 
 // Source: src/components/sections/ProjectsSection.tsx
@@ -1353,18 +1360,18 @@ export type PROJECTS_QUERY_RESULT = Array<{
   slug: Slug | null;
   tagline: string | null;
   category:
-  | "ai-ml"
-  | "api-backend"
-  | "browser-extension"
-  | "cli-tool"
-  | "desktop-app"
-  | "devops"
-  | "game"
-  | "mobile-app"
-  | "open-source"
-  | "other"
-  | "web-app"
-  | null;
+    | "ai-ml"
+    | "api-backend"
+    | "browser-extension"
+    | "cli-tool"
+    | "desktop-app"
+    | "devops"
+    | "game"
+    | "mobile-app"
+    | "open-source"
+    | "other"
+    | "web-app"
+    | null;
   liveUrl: string | null;
   githubUrl: string | null;
   coverImage: {
@@ -1378,106 +1385,30 @@ export type PROJECTS_QUERY_RESULT = Array<{
   technologies: Array<{
     name: string | null;
     category:
-    | "ai-ml"
-    | "backend"
-    | "cloud"
-    | "database"
-    | "design"
-    | "devops"
-    | "frontend"
-    | "mobile"
-    | "other"
-    | "soft-skills"
-    | "testing"
-    | "tools"
-    | null;
+      | "ai-ml"
+      | "backend"
+      | "cloud"
+      | "database"
+      | "design"
+      | "devops"
+      | "frontend"
+      | "mobile"
+      | "other"
+      | "soft-skills"
+      | "testing"
+      | "tools"
+      | null;
     color: string | null;
   }> | null;
 }>;
 
-// Source: src/components/sections/ServicesSection.tsx
-// Variable: SERVICES_QUERY
-// Query: *[_type == "service"] | order(order asc, _createdAt desc){  title,  slug,  icon,  shortDescription,  fullDescription,  features,  technologies[]->{name, category},  deliverables,  pricing,  timeline,  featured,  order}
-export type SERVICES_QUERY_RESULT = Array<{
-  title: string | null;
-  slug: Slug | null;
-  icon: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-  shortDescription: string | null;
-  fullDescription: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
-  features: Array<string> | null;
-  technologies: Array<{
-    name: string | null;
-    category:
-    | "ai-ml"
-    | "backend"
-    | "cloud"
-    | "database"
-    | "design"
-    | "devops"
-    | "frontend"
-    | "mobile"
-    | "other"
-    | "soft-skills"
-    | "testing"
-    | "tools"
-    | null;
-  }> | null;
-  deliverables: Array<string> | null;
-  pricing: {
-    startingPrice?: number;
-    priceType?: "custom" | "hourly" | "monthly" | "project";
-    description?: string;
-  } | null;
-  timeline: string | null;
-  featured: boolean | null;
-  order: number | null;
-}>;
-
 // Source: src/components/sections/SkillsSection.tsx
 // Variable: SKILLS_QUERY
-// Query: *[_type == "skill"] | order(category asc, order asc){  name,  category,  proficiency,  percentage,  yearsOfExperience,  color}
+// Query: *[_type == "skill" && category != "soft-skills"] | order(yearsOfExperience desc, name asc){  _id,  name,  proficiency,  color}
 export type SKILLS_QUERY_RESULT = Array<{
+  _id: string;
   name: string | null;
-  category:
-  | "ai-ml"
-  | "backend"
-  | "cloud"
-  | "database"
-  | "design"
-  | "devops"
-  | "frontend"
-  | "mobile"
-  | "other"
-  | "soft-skills"
-  | "testing"
-  | "tools"
-  | null;
   proficiency: "advanced" | "beginner" | "expert" | "intermediate" | null;
-  percentage: number | null;
-  yearsOfExperience: number | null;
   color: string | null;
 }>;
 
@@ -1517,15 +1448,13 @@ declare module "@sanity/client" {
     '*[_id == "singleton-profile"][0]{\n    _id,\n    _type,\n    _createdAt,\n    _updatedAt,\n    _rev,\n    firstName,\n    lastName,\n    headline,\n    shortBio,\n    email,\n    phone,\n    location,\n    availability,\n    socialLinks,\n    yearsOfExperience,\n    profileImage\n  }': CHAT_PROFILE_QUERY_RESULT;
     '*[_id == "singleton-profile"][0]{\n  firstName,\n  lastName,\n  fullBio,\n  yearsOfExperience,\n  stats,\n  email,\n  phone,\n  location\n}': ABOUT_QUERY_RESULT;
     '*[_type == "achievement"] | order(date desc){\n  title,\n  type,\n  issuer,\n  date,\n  description,\n  image,\n  url,\n  featured,\n  order\n}': ACHIEVEMENTS_QUERY_RESULT;
-    '*[_type == "blog"] | order(publishedAt desc){\n  title,\n  slug,\n  excerpt,\n  category,\n  tags,\n  publishedAt,\n  readTime,\n  featuredImage\n}': BLOG_QUERY_RESULT;
     '*[_type == "certification"] | order(issueDate desc){\n  name,\n  issuer,\n  issueDate,\n  expiryDate,\n  credentialId,\n  credentialUrl,\n  logo,\n  description,\n  skills[]->{name, category},\n  order\n}': CERTIFICATIONS_QUERY_RESULT;
     '*[_id == "singleton-profile"][0]{\n  email,\n  phone,\n  location,\n  socialLinks\n}': PROFILE_QUERY_RESULT;
     '*[_type == "education"] | order(endDate desc, startDate desc){\n  institution,\n  degree,\n  fieldOfStudy,\n  startDate,\n  endDate,\n  current,\n  gpa,\n  description,\n  achievements,\n  logo,\n  website,\n  order\n}': EDUCATION_QUERY_RESULT;
     '*[_type == "experience"] | order(startDate desc){\n  company,\n  position,\n  employmentType,\n  location,\n  startDate,\n  endDate,\n  current,\n  description,\n  responsibilities,\n  achievements,\n  technologies[]->{name, category},\n  companyLogo,\n  companyWebsite\n}': EXPERIENCE_QUERY_RESULT;
-    '*[_id == "singleton-profile"][0]{\n  firstName,\n  lastName,\n  headline,\n  headlineStaticText,\n  headlineAnimatedWords,\n  headlineAnimationDuration,\n  shortBio,\n  email,\n  phone,\n  location,\n  availability,\n  socialLinks,\n  yearsOfExperience,\n  profileImage\n}': HERO_QUERY_RESULT;
+    '*[_id == "singleton-profile"][0]{\n  firstName,\n  lastName,\n  headline,\n  headlineStaticText,\n  headlineAnimatedWords,\n  headlineAnimationDuration,\n  shortBio,\n  email,\n  phone,\n  location,\n  availability,\n  socialLinks,\n  yearsOfExperience,\n  profileImage,\n  workAuthorization,\n  languages,\n  "resumeUrl": resume.asset->url\n}': HERO_QUERY_RESULT;
     '*[_type == "project" && featured == true] | order(order asc)[0...6]{\n  title,\n  slug,\n  tagline,\n  category,\n  liveUrl,\n  githubUrl,\n  coverImage,\n  technologies[]->{name, category, color}\n}': PROJECTS_QUERY_RESULT;
-    '*[_type == "service"] | order(order asc, _createdAt desc){\n  title,\n  slug,\n  icon,\n  shortDescription,\n  fullDescription,\n  features,\n  technologies[]->{name, category},\n  deliverables,\n  pricing,\n  timeline,\n  featured,\n  order\n}': SERVICES_QUERY_RESULT;
-    '*[_type == "skill"] | order(category asc, order asc){\n  name,\n  category,\n  proficiency,\n  percentage,\n  yearsOfExperience,\n  color\n}': SKILLS_QUERY_RESULT;
+    '*[_type == "skill" && category != "soft-skills"] | order(yearsOfExperience desc, name asc){\n  _id,\n  name,\n  proficiency,\n  color\n}': SKILLS_QUERY_RESULT;
     '*[_type == "testimonial" && featured == true] | order(order asc){\n  name,\n  position,\n  company,\n  testimonial,\n  rating,\n  date,\n  avatar,\n  companyLogo,\n  linkedinUrl\n}': TESTIMONIALS_QUERY_RESULT;
   }
 }

@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SectionHeading } from "./SectionHeading";
 
 const ABOUT_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   firstName,
@@ -23,96 +24,104 @@ export async function AboutSection() {
 
   return (
     <section id="about" className="py-20 px-6">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">About Me</h2>
-          <p className="text-xl text-muted-foreground">Get to know me better</p>
-        </div>
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading
+          title="About Me"
+          description="Enterprise engineer, now building with AI."
+        />
 
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          {profile.fullBio && (
-            <PortableText
-              value={profile.fullBio}
-              components={{
-                block: {
-                  normal: ({ children }) => (
-                    <p className="text-muted-foreground leading-relaxed mb-4">
-                      {children}
-                    </p>
-                  ),
-                  h2: ({ children }) => (
-                    <h2 className="text-3xl font-bold mt-8 mb-4">{children}</h2>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className="text-2xl font-semibold mt-6 mb-3">
-                      {children}
-                    </h3>
-                  ),
-                  blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-primary pl-4 italic my-4">
-                      {children}
-                    </blockquote>
-                  ),
-                },
-                marks: {
-                  strong: ({ children }) => (
-                    <strong className="font-semibold text-foreground">
-                      {children}
-                    </strong>
-                  ),
-                  em: ({ children }) => <em className="italic">{children}</em>,
-                  link: ({ children, value }) => {
-                    const href = value?.href || "";
-                    const isExternal = href.startsWith("http");
-                    return (
-                      <Link
-                        href={href}
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
-                        className="text-primary hover:underline"
-                      >
+        <div
+          className={`grid grid-cols-1 gap-10 lg:gap-14 items-start ${
+            profile.stats?.length ? "lg:grid-cols-[minmax(0,1fr)_320px]" : ""
+          }`}
+        >
+          <div className="prose prose-lg dark:prose-invert max-w-none">
+            {profile.fullBio && (
+              <PortableText
+                value={profile.fullBio}
+                components={{
+                  block: {
+                    normal: ({ children }) => (
+                      <p className="text-muted-foreground leading-relaxed mb-4">
                         {children}
-                      </Link>
-                    );
+                      </p>
+                    ),
+                    h2: ({ children }) => (
+                      <h2 className="text-3xl font-bold mt-8 mb-4">
+                        {children}
+                      </h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className="text-2xl font-semibold mt-6 mb-3">
+                        {children}
+                      </h3>
+                    ),
+                    blockquote: ({ children }) => (
+                      <blockquote className="border-l-4 border-primary pl-4 italic my-4">
+                        {children}
+                      </blockquote>
+                    ),
                   },
-                },
-                list: {
-                  bullet: ({ children }) => (
-                    <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground">
-                      {children}
-                    </ul>
-                  ),
-                  number: ({ children }) => (
-                    <ol className="list-decimal list-inside space-y-2 mb-4 text-muted-foreground">
-                      {children}
-                    </ol>
-                  ),
-                },
-              }}
-            />
-          )}
-        </div>
+                  marks: {
+                    strong: ({ children }) => (
+                      <strong className="font-semibold text-foreground">
+                        {children}
+                      </strong>
+                    ),
+                    em: ({ children }) => (
+                      <em className="italic">{children}</em>
+                    ),
+                    link: ({ children, value }) => {
+                      const href = value?.href || "";
+                      const isExternal = href.startsWith("http");
+                      return (
+                        <Link
+                          href={href}
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noopener noreferrer" : undefined}
+                          className="text-primary hover:underline"
+                        >
+                          {children}
+                        </Link>
+                      );
+                    },
+                  },
+                  list: {
+                    bullet: ({ children }) => (
+                      <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground">
+                        {children}
+                      </ul>
+                    ),
+                    number: ({ children }) => (
+                      <ol className="list-decimal list-inside space-y-2 mb-4 text-muted-foreground">
+                        {children}
+                      </ol>
+                    ),
+                  },
+                }}
+              />
+            )}
+          </div>
 
-        {/* Stats from CMS */}
-        {profile.stats && profile.stats.length > 0 && (
-          <div className="@container mt-12 pt-12 border-t">
-            <div className="grid grid-cols-2 @lg:grid-cols-4 gap-6">
+          {/* Stats from CMS, beside the bio on large screens */}
+          {profile.stats && profile.stats.length > 0 && (
+            <aside aria-label="Quick facts" className="grid grid-cols-2 gap-3">
               {profile.stats.map((stat, idx) => (
                 <div
                   key={`${stat.label}-${idx}`}
-                  className="@container/stat text-center"
+                  className="rounded-xl border bg-card p-5"
                 >
-                  <div className="text-3xl @md/stat:text-4xl font-bold text-primary mb-2">
+                  <div className="font-heading text-3xl font-bold text-primary mb-1 tabular-nums">
                     {stat.value}
                   </div>
-                  <div className="text-xs @md/stat:text-sm text-muted-foreground">
+                  <div className="text-xs text-muted-foreground leading-snug">
                     {stat.label}
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        )}
+            </aside>
+          )}
+        </div>
       </div>
     </section>
   );

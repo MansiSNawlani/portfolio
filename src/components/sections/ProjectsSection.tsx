@@ -3,6 +3,7 @@ import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SectionHeading } from "./SectionHeading";
 
 const PROJECTS_QUERY =
   defineQuery(`*[_type == "project" && featured == true] | order(order asc)[0...6]{
@@ -16,6 +17,32 @@ const PROJECTS_QUERY =
   technologies[]->{name, category, color}
 }`);
 
+const CATEGORY_LABELS: Record<string, string> = {
+  "web-app": "Web app",
+  "mobile-app": "Mobile app",
+  "ai-ml": "AI / ML",
+  "api-backend": "API / Backend",
+  devops: "DevOps",
+  "open-source": "Open source",
+  "cli-tool": "CLI tool",
+  "desktop-app": "Desktop app",
+  "browser-extension": "Browser extension",
+  game: "Game",
+  other: "Other",
+};
+
+// Employer projects link to the company's product page; a link to this site
+// (the portfolio project itself) is a live site you can visit.
+function liveLinkLabel(url: string) {
+  try {
+    return new URL(url).hostname.endsWith("mansisn.com")
+      ? "Visit site"
+      : "View product";
+  } catch {
+    return "View product";
+  }
+}
+
 export async function ProjectsSection() {
   const { data: projects } = await sanityFetch({ query: PROJECTS_QUERY });
 
@@ -24,17 +51,19 @@ export async function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="py-20 px-6 bg-muted/30">
+    <section id="projects" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-xl text-muted-foreground">Some of my best work</p>
-        </div>
+        <SectionHeading
+          title="Projects"
+          description="Products I've helped build."
+        />
 
         <div className="@container">
-          <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-8">
+          <div
+            className={`grid grid-cols-1 @2xl:grid-cols-2 gap-8 ${
+              projects.length % 3 === 0 ? "@5xl:grid-cols-3" : ""
+            }`}
+          >
             {projects.map((project) => (
               <div
                 key={project.slug?.current}
@@ -63,7 +92,8 @@ export async function ProjectsSection() {
                     <div className="flex items-center gap-2 mb-2">
                       {project.category && (
                         <span className="text-xs px-2 py-0.5 @md/card:py-1 rounded-full bg-primary/10 text-primary">
-                          {project.category}
+                          {CATEGORY_LABELS[project.category] ??
+                            project.category}
                         </span>
                       )}
                     </div>
@@ -109,7 +139,7 @@ export async function ProjectsSection() {
                         rel="noopener noreferrer"
                         className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-xs @md/card:text-sm"
                       >
-                        Live Demo
+                        {liveLinkLabel(project.liveUrl)}
                       </Link>
                     )}
                     {project.githubUrl && (

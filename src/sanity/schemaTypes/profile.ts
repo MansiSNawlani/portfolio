@@ -120,6 +120,46 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "workAuthorization",
+      title: "Work Authorization",
+      type: "string",
+      description:
+        "Shown in the hero, e.g. 'Work permit for Germany · no sponsorship needed'",
+    }),
+    defineField({
+      name: "languages",
+      title: "Languages",
+      type: "array",
+      description: "Shown in the hero, e.g. English (Fluent), German (A2)",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "name",
+              title: "Language",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "level",
+              title: "Level",
+              type: "string",
+              description: "e.g. Fluent, Native, A2 (learning)",
+            },
+          ],
+          preview: { select: { title: "name", subtitle: "level" } },
+        },
+      ],
+    }),
+    defineField({
+      name: "resume",
+      title: "Resume / CV",
+      type: "file",
+      description: "PDF shown as the 'Download CV' button in the hero",
+      options: { accept: "application/pdf" },
+    }),
+    defineField({
       name: "yearsOfExperience",
       title: "Years of Experience",
       type: "number",

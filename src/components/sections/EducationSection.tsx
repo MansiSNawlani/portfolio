@@ -4,6 +4,7 @@ import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SectionHeading } from "./SectionHeading";
 
 const EDUCATION_QUERY =
   defineQuery(`*[_type == "education"] | order(endDate desc, startDate desc){
@@ -36,10 +37,7 @@ export async function EducationSection() {
   };
 
   return (
-    <section
-      id="education"
-      className="relative py-20 px-6 bg-muted/30 overflow-hidden"
-    >
+    <section id="education" className="relative py-20 px-6 overflow-hidden">
       {/* Section-wide Dotted Glow Background */}
       {/* <DottedGlowBackground
         className="pointer-events-none opacity-30 dark:opacity-50 mask-radial-to-75% mask-radial-at-bottom"
@@ -57,12 +55,7 @@ export async function EducationSection() {
       /> */}
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Education</h2>
-          <p className="text-xl text-muted-foreground">
-            My academic background
-          </p>
-        </div>
+        <SectionHeading title="Education" description="Where it started." />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {education.map((edu) => (

@@ -1,9 +1,10 @@
-import { IconExternalLink, IconStar } from "@tabler/icons-react";
+import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SectionHeading } from "./SectionHeading";
 
 const ACHIEVEMENTS_QUERY =
   defineQuery(`*[_type == "achievement"] | order(date desc){
@@ -64,35 +65,71 @@ export async function AchievementsSection() {
     return labels[type] || "Achievement";
   };
 
-  // Separate featured and regular achievements
-  const featured = achievements.filter((a) => a.featured);
-  const regular = achievements.filter((a) => !a.featured);
+  // Merge repeat awards (e.g. several SPOT Awards) into one card that lists
+  // each occurrence. The query is date-desc, so the first entry is the latest.
+  const grouped = Array.from(
+    achievements
+      .reduce(
+        (groups, achievement) => {
+          const key = achievement.title ?? "";
+          const group = groups.get(key);
+          if (group) {
+            group.occurrences.push(achievement);
+            group.featured ||= Boolean(achievement.featured);
+          } else {
+            groups.set(key, {
+              ...achievement,
+              featured: Boolean(achievement.featured),
+              occurrences: [achievement],
+            });
+          }
+          return groups;
+        },
+        new Map<
+          string,
+          (typeof achievements)[number] & {
+            featured: boolean;
+            occurrences: typeof achievements;
+          }
+        >(),
+      )
+      .values(),
+  );
+
+  const featured = grouped.filter((a) => a.featured);
+  const regular = grouped.filter((a) => !a.featured);
+
+  const renderOccurrences = (
+    achievement: (typeof grouped)[number],
+    className: string,
+  ) => (
+    <ul className={className}>
+      {achievement.occurrences.map((occurrence) => (
+        <li key={`${occurrence.issuer}-${occurrence.date}`}>
+          {occurrence.date && formatDate(occurrence.date)}
+          {occurrence.issuer && ` · ${occurrence.issuer}`}
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
-    <section id="achievements" className="py-20 px-6 bg-muted/30">
+    <section id="achievements" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Achievements & Awards
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Milestones and recognitions
-          </p>
-        </div>
+        <SectionHeading
+          title="Achievements"
+          description="Recognition along the way."
+        />
 
         {/* Featured Achievements */}
         {featured.length > 0 && (
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <IconStar className="w-6 h-6 text-yellow-500 fill-yellow-500" />
-              Featured Achievements
-            </h3>
+          <div className="mb-6">
             <div className="@container">
               <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-6">
                 {featured.map((achievement) => (
                   <div
                     key={`${achievement.title}-${achievement.date}`}
-                    className="@container/card bg-card border-2 border-primary/20 rounded-lg p-6 hover:shadow-lg transition-all hover:scale-[1.02]"
+                    className="@container/card bg-card border rounded-lg p-6 hover:shadow-lg transition-all hover:scale-[1.02]"
                   >
                     {achievement.image && (
                       <div className="relative w-full h-32 @md/card:h-48 mb-4 rounded-lg overflow-hidden">
@@ -118,21 +155,32 @@ export async function AchievementsSection() {
                           {getTypeLabel(achievement.type)}
                         </span>
                       )}
-                      {achievement.date && (
-                        <span className="text-xs @md/card:text-sm text-muted-foreground">
-                          {formatDate(achievement.date)}
-                        </span>
-                      )}
+                      {achievement.date &&
+                        achievement.occurrences.length === 1 && (
+                          <span className="text-xs @md/card:text-sm text-muted-foreground">
+                            {formatDate(achievement.date)}
+                          </span>
+                        )}
                     </div>
 
                     <h4 className="text-lg @md/card:text-xl font-semibold mb-2">
                       {achievement.title}
+                      {achievement.occurrences.length > 1 && (
+                        <span className="ml-2 align-middle text-xs font-mono font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                          ×{achievement.occurrences.length}
+                        </span>
+                      )}
                     </h4>
-                    {achievement.issuer && (
-                      <p className="text-primary font-medium mb-3 text-sm @md/card:text-base truncate">
-                        {achievement.issuer}
-                      </p>
-                    )}
+                    {achievement.occurrences.length > 1
+                      ? renderOccurrences(
+                          achievement,
+                          "mb-3 space-y-0.5 text-sm text-muted-foreground",
+                        )
+                      : achievement.issuer && (
+                          <p className="text-primary font-medium mb-3 text-sm @md/card:text-base truncate">
+                            {achievement.issuer}
+                          </p>
+                        )}
                     {achievement.description && (
                       <p className="text-muted-foreground mb-4 text-sm @md/card:text-base line-clamp-3">
                         {achievement.description}
@@ -160,9 +208,6 @@ export async function AchievementsSection() {
         {/* Regular Achievements */}
         {regular.length > 0 && (
           <div>
-            {featured.length > 0 && (
-              <h3 className="text-2xl font-bold mb-6">All Achievements</h3>
-            )}
             <div className="@container">
               <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 gap-6">
                 {regular.map((achievement) => (
@@ -199,16 +244,30 @@ export async function AchievementsSection() {
 
                       <h4 className="text-base @md/card:text-lg font-semibold mb-2 line-clamp-2">
                         {achievement.title}
+                        {achievement.occurrences.length > 1 && (
+                          <span className="ml-2 align-middle text-xs font-mono font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                            ×{achievement.occurrences.length}
+                          </span>
+                        )}
                       </h4>
-                      {achievement.issuer && (
-                        <p className="text-primary font-medium mb-2 text-xs @md/card:text-sm truncate">
-                          {achievement.issuer}
-                        </p>
-                      )}
-                      {achievement.date && (
-                        <p className="text-xs @md/card:text-sm text-muted-foreground mb-3">
-                          {formatDate(achievement.date)}
-                        </p>
+                      {achievement.occurrences.length > 1 ? (
+                        renderOccurrences(
+                          achievement,
+                          "mb-3 space-y-0.5 text-xs @md/card:text-sm text-muted-foreground",
+                        )
+                      ) : (
+                        <>
+                          {achievement.issuer && (
+                            <p className="text-primary font-medium mb-2 text-xs @md/card:text-sm truncate">
+                              {achievement.issuer}
+                            </p>
+                          )}
+                          {achievement.date && (
+                            <p className="text-xs @md/card:text-sm text-muted-foreground mb-3">
+                              {formatDate(achievement.date)}
+                            </p>
+                          )}
+                        </>
                       )}
                       {achievement.description && (
                         <p className="text-xs @md/card:text-sm text-muted-foreground line-clamp-3">

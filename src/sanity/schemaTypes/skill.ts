@@ -51,7 +51,8 @@ export default defineType({
       name: "percentage",
       title: "Proficiency Percentage",
       type: "number",
-      description: "0-100 for visual progress bars",
+      description: "Deprecated: no longer shown on the site",
+      hidden: true,
       validation: (Rule) => Rule.min(0).max(100),
     }),
     defineField({

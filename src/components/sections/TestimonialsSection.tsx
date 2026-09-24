@@ -2,6 +2,7 @@ import { defineQuery } from "next-sanity";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SectionHeading } from "./SectionHeading";
 
 const TESTIMONIALS_QUERY =
   defineQuery(`*[_type == "testimonial" && featured == true] | order(order asc){
@@ -43,16 +44,12 @@ export async function TestimonialsSection() {
   }));
 
   return (
-    <section id="testimonials" className="py-20 px-6">
+    <section id="testimonials" className="py-20 px-6 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Testimonials
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            What people say about working with me
-          </p>
-        </div>
+        <SectionHeading
+          title="Testimonials"
+          description="What colleagues say about working with me."
+        />
 
         <AnimatedTestimonials
           testimonials={formattedTestimonials}

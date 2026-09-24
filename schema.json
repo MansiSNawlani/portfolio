@@ -2799,6 +2799,36 @@
     }
   },
   {
+    "type": "type",
+    "name": "sanity.fileAsset.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "sanity.fileAsset"
+    }
+  },
+  {
     "name": "profile",
     "type": "document",
     "attributes": {
@@ -3179,47 +3209,87 @@
               },
               "optional": true
             },
-            "twitter": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
             "website": {
               "type": "objectAttribute",
               "value": {
                 "type": "string"
               },
               "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "workAuthorization": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "languages": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "name": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "level": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              }
             },
-            "medium": {
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "resume": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "asset": {
               "type": "objectAttribute",
               "value": {
-                "type": "string"
+                "type": "inline",
+                "name": "sanity.fileAsset.reference"
               },
               "optional": true
             },
-            "devto": {
+            "media": {
               "type": "objectAttribute",
               "value": {
-                "type": "string"
+                "type": "unknown"
               },
               "optional": true
             },
-            "youtube": {
+            "_type": {
               "type": "objectAttribute",
               "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "stackoverflow": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
+                "type": "string",
+                "value": "file"
+              }
             }
           }
         },

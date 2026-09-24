@@ -1,8 +1,15 @@
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconWorld,
+} from "@tabler/icons-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { ContactForm } from "./ContactForm";
 import WorldMap from "../ui/world-map";
+import { ContactForm } from "./ContactForm";
+import { SectionHeading } from "./SectionHeading";
 
 const PROFILE_QUERY = defineQuery(`*[_id == "singleton-profile"][0]{
   email,
@@ -19,17 +26,16 @@ export async function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 px-6 pb-40 bg-muted/30">
-      <WorldMap />
+    <section id="contact" className="relative overflow-hidden py-20 px-6 pb-40">
+      <div className="absolute inset-x-0 top-0 mx-auto max-w-6xl opacity-60">
+        <WorldMap />
+      </div>
 
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
-          <p className="text-xl text-muted-foreground">
-            Wherever you are in the world, let&apos;s work together on your next
-            project.
-          </p>
-        </div>
+      <div className="relative container mx-auto max-w-6xl">
+        <SectionHeading
+          title="Get in Touch"
+          description="Open to new opportunities. Email is the fastest way to reach me."
+        />
 
         <div className="@container">
           <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-8">
@@ -42,7 +48,10 @@ export async function ContactSection() {
               {profile.email && (
                 <div className="flex items-start gap-3 @md/info:gap-4">
                   <div className="w-10 h-10 @md/info:w-12 @md/info:h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl @md/info:text-2xl">📧</span>
+                    <Mail
+                      className="size-5 @md/info:size-6 text-primary"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
@@ -61,7 +70,10 @@ export async function ContactSection() {
               {profile.phone && (
                 <div className="flex items-start gap-3 @md/info:gap-4">
                   <div className="w-10 h-10 @md/info:w-12 @md/info:h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl @md/info:text-2xl">📱</span>
+                    <Phone
+                      className="size-5 @md/info:size-6 text-primary"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
@@ -80,7 +92,10 @@ export async function ContactSection() {
               {profile.location && (
                 <div className="flex items-start gap-3 @md/info:gap-4">
                   <div className="w-10 h-10 @md/info:w-12 @md/info:h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl @md/info:text-2xl">📍</span>
+                    <MapPin
+                      className="size-5 @md/info:size-6 text-primary"
+                      aria-hidden="true"
+                    />
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
@@ -96,7 +111,7 @@ export async function ContactSection() {
               {profile.socialLinks && (
                 <div className="pt-6">
                   <h4 className="font-semibold mb-4 text-sm @md/info:text-base">
-                    Follow Me
+                    Elsewhere
                   </h4>
                   <div className="flex flex-wrap gap-2 @md/info:gap-3">
                     {profile.socialLinks.github && (
@@ -104,8 +119,12 @@ export async function ContactSection() {
                         href={profile.socialLinks.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
+                        <IconBrandGithub
+                          className="size-4"
+                          aria-hidden="true"
+                        />
                         GitHub
                       </Link>
                     )}
@@ -114,8 +133,12 @@ export async function ContactSection() {
                         href={profile.socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
+                        <IconBrandLinkedin
+                          className="size-4"
+                          aria-hidden="true"
+                        />
                         LinkedIn
                       </Link>
                     )}
@@ -124,8 +147,9 @@ export async function ContactSection() {
                         href={profile.socialLinks.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
                       >
+                        <IconWorld className="size-4" aria-hidden="true" />
                         Website
                       </Link>
                     )}

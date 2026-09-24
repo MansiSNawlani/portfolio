@@ -2,9 +2,9 @@ import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { defineQuery } from "next-sanity";
-import { CometCard } from "@/components/ui/comet-card";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SectionHeading } from "./SectionHeading";
 
 const CERTIFICATIONS_QUERY =
   defineQuery(`*[_type == "certification"] | order(issueDate desc){
@@ -32,8 +32,7 @@ export async function CertificationsSection() {
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
-      day: "numeric",
+      month: "short",
     });
   };
 
@@ -42,201 +41,131 @@ export async function CertificationsSection() {
     return new Date(expiryDate) < new Date();
   };
 
+  const initials = (issuer: string) =>
+    issuer
+      .split(/[^\p{L}\p{N}]+/u)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((word) => word[0]?.toUpperCase())
+      .join("");
+
+  // Group by issuer. The query is issueDate-desc, so groups are ordered by
+  // their most recent credential.
+  const groups = Array.from(
+    certifications
+      .reduce((map, cert) => {
+        const issuer = cert.issuer || "Other";
+        map.set(issuer, [...(map.get(issuer) ?? []), cert]);
+        return map;
+      }, new Map<string, typeof certifications>())
+      .entries(),
+  );
+
   return (
-    <section
-      id="certifications"
-      className="py-20 px-6 bg-gradient-to-b from-background via-muted/20 to-background"
-    >
+    <section id="certifications" className="py-20 px-6 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Certifications
-          </h2>
-          <p className="text-xl text-muted-foreground">
-            Professional credentials and certifications
-          </p>
-        </div>
+        <SectionHeading
+          title="Certifications"
+          description="Verified credentials, grouped by issuer."
+        />
 
-        <div className="@container">
-          <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-10">
-            {certifications.map((cert) => (
-              <CometCard
-                key={`${cert.issuer}-${cert.name}-${cert.issueDate}`}
-                rotateDepth={8}
-                translateDepth={10}
-                className="w-full"
+        <div className="rounded-xl border bg-card overflow-hidden divide-y">
+          {groups.map(([issuer, certs]) => {
+            const logo = certs.find((cert) => cert.logo)?.logo;
+
+            return (
+              <div
+                key={issuer}
+                className="grid grid-cols-1 md:grid-cols-[240px_1fr]"
               >
-                {/* Outer Frame - Light Matting */}
-                <div
-                  className="relative bg-card border-8 border-card/80 rounded-sm shadow-2xl p-4"
-                  style={{
-                    transformStyle: "preserve-3d",
-                  }}
-                >
-                  {/* Inner Certificate - Dark Background */}
-                  <div className="relative bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 dark:from-zinc-950 dark:via-black dark:to-zinc-950 border-2 border-yellow-600/40 p-8 flex flex-col min-h-[450px]">
-                    {/* Decorative Corner Frames - Top Left */}
-                    <div className="absolute top-0 left-0 w-20 h-20">
-                      <div className="absolute top-3 left-3 w-10 h-10 border-t-2 border-l-2 border-yellow-600/60" />
-                      <div className="absolute top-5 left-5 w-6 h-6 border-t-2 border-l-2 border-yellow-600/60" />
-                    </div>
-
-                    {/* Decorative Corner Frames - Top Right */}
-                    <div className="absolute top-0 right-0 w-20 h-20">
-                      <div className="absolute top-3 right-3 w-10 h-10 border-t-2 border-r-2 border-yellow-600/60" />
-                      <div className="absolute top-5 right-5 w-6 h-6 border-t-2 border-r-2 border-yellow-600/60" />
-                    </div>
-
-                    {/* Decorative Corner Frames - Bottom Left */}
-                    <div className="absolute bottom-0 left-0 w-20 h-20">
-                      <div className="absolute bottom-3 left-3 w-10 h-10 border-b-2 border-l-2 border-yellow-600/60" />
-                      <div className="absolute bottom-5 left-5 w-6 h-6 border-b-2 border-l-2 border-yellow-600/60" />
-                    </div>
-
-                    {/* Decorative Corner Frames - Bottom Right */}
-                    <div className="absolute bottom-0 right-0 w-20 h-20">
-                      <div className="absolute bottom-3 right-3 w-10 h-10 border-b-2 border-r-2 border-yellow-600/60" />
-                      <div className="absolute bottom-5 right-5 w-6 h-6 border-b-2 border-r-2 border-yellow-600/60" />
-                    </div>
-
-                    {/* Diamond Accents - Corners */}
-                    <div className="absolute top-2 left-2 w-3 h-3 rotate-45 bg-yellow-600/70" />
-                    <div className="absolute top-2 right-2 w-3 h-3 rotate-45 bg-yellow-600/70" />
-                    <div className="absolute bottom-2 left-2 w-3 h-3 rotate-45 bg-yellow-600/70" />
-                    <div className="absolute bottom-2 right-2 w-3 h-3 rotate-45 bg-yellow-600/70" />
-
-                    <div className="relative z-10 flex flex-col items-center text-center flex-1">
-                      {/* Date at Top */}
-                      <div className="mb-4">
-                        <p className="text-xs text-zinc-400">
-                          {cert.issueDate && formatDate(cert.issueDate)}
-                        </p>
-                      </div>
-
-                      {/* Certificate Title - Small and Gold at top */}
-                      <div className="mb-5">
-                        <h4 className="text-lg font-bold text-yellow-600/80 mb-1 uppercase tracking-wide">
-                          CERTIFICATE
-                        </h4>
-                        <p className="text-xs text-yellow-600/80 italic">for</p>
-                      </div>
-
-                      {/* Certificate Name - Main Subject */}
-                      <h3 className="text-3xl font-bold text-white mb-6 leading-tight px-4">
-                        {cert.name}
-                      </h3>
-
-                      {/* Description */}
-                      {cert.description && (
-                        <p className="text-sm text-zinc-300/80 mb-5 line-clamp-3 px-8 leading-relaxed">
-                          {cert.description}
-                        </p>
-                      )}
-
-                      {/* Logo Badge */}
-                      {cert.logo && (
-                        <div className="relative mb-5 flex items-center justify-center">
-                          <div className="relative w-16 h-16 p-2 bg-white/10 rounded-full border border-yellow-600/30">
-                            <div className="relative w-full h-full">
-                              <Image
-                                src={urlFor(cert.logo)
-                                  .width(64)
-                                  .height(64)
-                                  .url()}
-                                alt={`${cert.name} badge`}
-                                fill
-                                className="object-contain"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Issued By */}
-                      <div className="mb-4">
-                        <p className="text-lg font-semibold text-white">
-                          {cert.issuer}
-                        </p>
-                      </div>
-
-                      {/* Certificate Details */}
-                      <div className="flex-1 flex flex-col justify-end w-full mt-auto">
-                        {/* Skills/Competencies */}
-                        {cert.skills && cert.skills.length > 0 && (
-                          <div className="mb-4">
-                            <div className="flex flex-wrap justify-center gap-1.5">
-                              {cert.skills.slice(0, 4).map((skill, idx) => {
-                                const skillData =
-                                  skill &&
-                                  typeof skill === "object" &&
-                                  "name" in skill
-                                    ? skill
-                                    : null;
-                                return skillData?.name ? (
-                                  <span
-                                    key={`${cert.name}-skill-${idx}`}
-                                    className="px-2.5 py-1 text-[10px] bg-yellow-600/20 text-yellow-500 font-medium border border-yellow-600/30"
-                                  >
-                                    {skillData.name}
-                                  </span>
-                                ) : null;
-                              })}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Expiry and Credential Info */}
-                        <div className="space-y-2 text-xs mb-4">
-                          {cert.expiryDate && (
-                            <div className="text-center">
-                              <span className="text-zinc-400">
-                                Valid Until:{" "}
-                              </span>
-                              <span
-                                className={
-                                  isExpired(cert.expiryDate)
-                                    ? "text-red-400 font-semibold"
-                                    : "text-zinc-300 font-semibold"
-                                }
-                              >
-                                {formatDate(cert.expiryDate)}
-                                {isExpired(cert.expiryDate) && " (Expired)"}
-                              </span>
-                            </div>
-                          )}
-                          {cert.credentialId && (
-                            <div className="text-center">
-                              <p className="text-[9px] text-zinc-500 mb-1">
-                                Credential ID:
-                              </p>
-                              <p className="text-[9px] font-mono text-zinc-400 break-all px-4">
-                                {cert.credentialId}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Verify Credential Button */}
-                        {cert.credentialUrl && (
-                          <div className="w-full pt-4 border-t border-yellow-600/20">
-                            <Link
-                              href={cert.credentialUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-5 py-2 text-xs font-semibold text-zinc-900 bg-yellow-600/90 hover:bg-yellow-500 transition-all shadow-md hover:shadow-lg"
-                            >
-                              Verify Credential
-                              <IconExternalLink className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                {/* Issuer */}
+                <div className="flex items-start gap-3 p-5 bg-muted/40">
+                  <div className="relative size-10 shrink-0 rounded-lg overflow-hidden bg-primary/10 text-primary grid place-items-center font-heading text-sm font-bold">
+                    {logo ? (
+                      <Image
+                        src={urlFor(logo).width(80).height(80).url()}
+                        alt=""
+                        fill
+                        className="object-contain p-1"
+                      />
+                    ) : (
+                      <span aria-hidden="true">{initials(issuer)}</span>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-semibold leading-snug font-sans tracking-normal">
+                      {issuer}
+                    </h3>
+                    <p className="font-mono text-xs text-muted-foreground">
+                      {certs.length} credential{certs.length > 1 ? "s" : ""}
+                    </p>
                   </div>
                 </div>
-              </CometCard>
-            ))}
-          </div>
+
+                {/* Credentials */}
+                <ul className="divide-y">
+                  {certs.map((cert) => {
+                    const expired = isExpired(cert.expiryDate);
+
+                    return (
+                      <li
+                        key={`${cert.name}-${cert.issueDate}`}
+                        className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1.5 px-5 py-4"
+                      >
+                        <div className="min-w-0 space-y-1">
+                          <h4 className="text-[15px] font-semibold leading-snug">
+                            {cert.name}
+                          </h4>
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                            {cert.issueDate && (
+                              <span>Issued {formatDate(cert.issueDate)}</span>
+                            )}
+                            {cert.expiryDate && (
+                              <span
+                                className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 font-medium ${
+                                  expired
+                                    ? "bg-destructive/10 text-destructive"
+                                    : "bg-emerald-600/10 text-emerald-700 dark:text-emerald-400"
+                                }`}
+                              >
+                                <span
+                                  aria-hidden="true"
+                                  className="size-1.5 rounded-full bg-current"
+                                />
+                                {expired ? "Expired" : "Active until"}{" "}
+                                {formatDate(cert.expiryDate)}
+                              </span>
+                            )}
+                            {cert.credentialId && (
+                              <span className="font-mono">
+                                ID {cert.credentialId}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {cert.credentialUrl && (
+                          <Link
+                            href={cert.credentialUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline justify-self-start sm:justify-self-end"
+                          >
+                            Verify
+                            <IconExternalLink
+                              className="size-3.5"
+                              aria-hidden="true"
+                            />
+                            <span className="sr-only">{cert.name}</span>
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
