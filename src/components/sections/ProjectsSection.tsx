@@ -67,7 +67,7 @@ export async function ProjectsSection() {
             {projects.map((project) => (
               <div
                 key={project.slug?.current}
-                className="@container/card group bg-card border rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                className="@container/card group flex flex-col bg-card border rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
               >
                 {/* Project Image */}
                 {project.coverImage && (
@@ -87,28 +87,26 @@ export async function ProjectsSection() {
                 )}
 
                 {/* Project Content */}
-                <div className="p-4 @md/card:p-6 space-y-3 @md/card:space-y-4">
+                <div className="flex flex-1 flex-col gap-4 p-5 @md/card:p-6">
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       {project.category && (
-                        <span className="text-xs px-2 py-0.5 @md/card:py-1 rounded-full bg-primary/10 text-primary">
+                        <span className="text-xs font-medium uppercase tracking-[0.08em] text-primary">
                           {CATEGORY_LABELS[project.category] ??
                             project.category}
                         </span>
                       )}
                     </div>
-                    <h3 className="text-lg @md/card:text-xl font-semibold mb-2 line-clamp-2">
+                    <h3 className="type-card-title mb-2">
                       {project.title || "Untitled Project"}
                     </h3>
-                    <p className="text-muted-foreground text-xs @md/card:text-sm line-clamp-2">
-                      {project.tagline}
-                    </p>
+                    <p className="type-body">{project.tagline}</p>
                   </div>
 
                   {/* Tech Stack */}
                   {project.technologies && project.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 @md/card:gap-2">
-                      {project.technologies.slice(0, 4).map((tech, idx) => {
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.technologies.map((tech, idx) => {
                         const techData =
                           tech && typeof tech === "object" && "name" in tech
                             ? tech
@@ -116,28 +114,23 @@ export async function ProjectsSection() {
                         return techData?.name ? (
                           <span
                             key={`${project.slug?.current}-tech-${idx}`}
-                            className="text-xs px-2 py-0.5 @md/card:py-1 rounded-md bg-muted"
+                            className="type-chip px-2.5 py-1 rounded-full bg-primary/10 text-primary"
                           >
                             {techData.name}
                           </span>
                         ) : null;
                       })}
-                      {project.technologies.length > 4 && (
-                        <span className="text-xs px-2 py-0.5 @md/card:py-1 rounded-md bg-muted">
-                          +{project.technologies.length - 4}
-                        </span>
-                      )}
                     </div>
                   )}
 
                   {/* Actions */}
-                  <div className="flex flex-col @xs/card:flex-row gap-2 @xs/card:gap-3 pt-2">
+                  <div className="mt-auto flex flex-col @xs/card:flex-row gap-2 @xs/card:gap-3 pt-2">
                     {project.liveUrl && (
                       <Link
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 text-center px-3 py-2 @md/card:px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-xs @md/card:text-sm"
+                        className="flex-1 text-center px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium"
                       >
                         {liveLinkLabel(project.liveUrl)}
                       </Link>
@@ -147,7 +140,7 @@ export async function ProjectsSection() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-3 py-2 @md/card:px-4 rounded-lg border hover:bg-accent transition-colors text-xs @md/card:text-sm text-center"
+                        className="px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm font-medium text-center"
                       >
                         GitHub
                       </Link>

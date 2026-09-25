@@ -13,12 +13,8 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("mb-12 max-w-2xl space-y-3", className)}>
-      <h2 className="text-3xl md:text-4xl font-bold text-balance">{title}</h2>
-      {description && (
-        <p className="text-base md:text-lg text-muted-foreground text-pretty">
-          {description}
-        </p>
-      )}
+      <h2 className="type-section-title">{title}</h2>
+      {description && <p className="type-section-subtitle">{description}</p>}
     </div>
   );
 }

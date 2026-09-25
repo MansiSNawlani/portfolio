@@ -39,7 +39,7 @@ export function ContactForm() {
 
   return (
     <div className="@container/form bg-card border rounded-lg p-4 @md/form:p-6">
-      <h3 className="text-xl @md/form:text-2xl font-semibold mb-6">
+      <h3 className="type-card-title mb-6">
         Send a Message
       </h3>
 
@@ -58,7 +58,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="name"
-            className="block text-xs @md/form:text-sm font-medium mb-2"
+            className="block text-sm font-medium mb-2"
           >
             Name
           </label>
@@ -66,7 +66,7 @@ export function ContactForm() {
             type="text"
             id="name"
             name="name"
-            className="w-full px-3 py-1.5 @md/form:px-4 @md/form:py-2 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary text-sm @md/form:text-base"
+            className="w-full px-3 py-2 @md/form:px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary text-base"
             placeholder="Your name"
             required
             disabled={isPending}
@@ -76,7 +76,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-xs @md/form:text-sm font-medium mb-2"
+            className="block text-sm font-medium mb-2"
           >
             Email
           </label>
@@ -84,7 +84,7 @@ export function ContactForm() {
             type="email"
             id="email"
             name="email"
-            className="w-full px-3 py-1.5 @md/form:px-4 @md/form:py-2 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary text-sm @md/form:text-base"
+            className="w-full px-3 py-2 @md/form:px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary text-base"
             placeholder="your.email@example.com"
             required
             disabled={isPending}
@@ -94,7 +94,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="subject"
-            className="block text-xs @md/form:text-sm font-medium mb-2"
+            className="block text-sm font-medium mb-2"
           >
             Subject
           </label>
@@ -102,7 +102,7 @@ export function ContactForm() {
             type="text"
             id="subject"
             name="subject"
-            className="w-full px-3 py-1.5 @md/form:px-4 @md/form:py-2 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary text-sm @md/form:text-base"
+            className="w-full px-3 py-2 @md/form:px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary text-base"
             placeholder="What's this about?"
             required
             disabled={isPending}
@@ -112,7 +112,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="message"
-            className="block text-xs @md/form:text-sm font-medium mb-2"
+            className="block text-sm font-medium mb-2"
           >
             Message
           </label>
@@ -120,7 +120,7 @@ export function ContactForm() {
             id="message"
             name="message"
             rows={5}
-            className="w-full px-3 py-1.5 @md/form:px-4 @md/form:py-2 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm @md/form:text-base"
+            className="w-full px-3 py-2 @md/form:px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none text-base"
             placeholder="Tell me about your project..."
             required
             disabled={isPending}

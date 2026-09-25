@@ -35,26 +35,20 @@ export async function AboutSection() {
             profile.stats?.length ? "lg:grid-cols-[minmax(0,1fr)_320px]" : ""
           }`}
         >
-          <div className="prose prose-lg dark:prose-invert max-w-none">
+          <div>
             {profile.fullBio && (
               <PortableText
                 value={profile.fullBio}
                 components={{
                   block: {
                     normal: ({ children }) => (
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        {children}
-                      </p>
+                      <p className="type-body mb-4">{children}</p>
                     ),
                     h2: ({ children }) => (
-                      <h2 className="text-3xl font-bold mt-8 mb-4">
-                        {children}
-                      </h2>
+                      <h3 className="type-card-title mt-8 mb-3">{children}</h3>
                     ),
                     h3: ({ children }) => (
-                      <h3 className="text-2xl font-semibold mt-6 mb-3">
-                        {children}
-                      </h3>
+                      <h4 className="type-subheading mt-6 mb-2">{children}</h4>
                     ),
                     blockquote: ({ children }) => (
                       <blockquote className="border-l-4 border-primary pl-4 italic my-4">
@@ -88,12 +82,12 @@ export async function AboutSection() {
                   },
                   list: {
                     bullet: ({ children }) => (
-                      <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground">
+                      <ul className="list-disc pl-5 space-y-1.5 mb-4 type-body">
                         {children}
                       </ul>
                     ),
                     number: ({ children }) => (
-                      <ol className="list-decimal list-inside space-y-2 mb-4 text-muted-foreground">
+                      <ol className="list-decimal pl-5 space-y-1.5 mb-4 type-body">
                         {children}
                       </ol>
                     ),

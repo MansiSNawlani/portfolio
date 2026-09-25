@@ -81,23 +81,17 @@ export async function EducationSection() {
                   )}
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-bold mb-1 line-clamp-2 group-hover:text-primary transition-colors">
-                      {edu.degree}
-                    </h3>
-                    <p className="text-lg font-medium text-primary mb-1">
-                      {edu.institution}
-                    </p>
+                    <h3 className="type-card-title mb-1">{edu.degree}</h3>
+                    <p className="type-org mb-1">{edu.institution}</p>
                     {edu.fieldOfStudy && (
-                      <p className="text-sm text-muted-foreground">
-                        {edu.fieldOfStudy}
-                      </p>
+                      <p className="type-meta">{edu.fieldOfStudy}</p>
                     )}
                   </div>
                 </div>
 
                 {/* Date and GPA badges */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-sm">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted type-chip">
                     <IconCalendar className="w-3.5 h-3.5" />
                     <span>
                       {edu.startDate && formatDate(edu.startDate)} -{" "}
@@ -109,7 +103,7 @@ export async function EducationSection() {
                     </span>
                   </div>
                   {edu.gpa && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary type-chip">
                       <IconAward className="w-3.5 h-3.5" />
                       <span>GPA: {edu.gpa}</span>
                     </div>
@@ -118,26 +112,19 @@ export async function EducationSection() {
 
                 {/* Description */}
                 {edu.description && (
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-                    {edu.description}
-                  </p>
+                  <p className="type-body mb-4">{edu.description}</p>
                 )}
 
-                {/* Achievements */}
+                {/* Achievements (same list style as Experience) */}
                 {edu.achievements && edu.achievements.length > 0 && (
-                  <div className="mb-4 p-3 rounded-lg bg-muted/50">
-                    <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                      <IconAward className="w-4 h-4 text-primary" />
-                      Achievements & Honors
+                  <div className="mb-4">
+                    <h4 className="type-subheading mb-2">
+                      Achievements & honors
                     </h4>
-                    <ul className="space-y-1.5">
+                    <ul className="list-disc pl-5 space-y-1.5 type-body marker:text-primary/60">
                       {edu.achievements.map((achievement, idx) => (
-                        <li
-                          key={`${edu.institution}-achievement-${idx}`}
-                          className="text-xs text-muted-foreground flex items-start gap-2"
-                        >
-                          <span className="text-primary mt-1">▸</span>
-                          <span className="flex-1">{achievement}</span>
+                        <li key={`${edu.institution}-achievement-${idx}`}>
+                          {achievement}
                         </li>
                       ))}
                     </ul>
@@ -150,7 +137,7 @@ export async function EducationSection() {
                     href={edu.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-primary hover:underline font-medium group-hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
                   >
                     Visit Website
                     <IconExternalLink className="w-4 h-4" />

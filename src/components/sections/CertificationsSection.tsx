@@ -93,10 +93,8 @@ export async function CertificationsSection() {
                     )}
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-sm font-semibold leading-snug font-sans tracking-normal">
-                      {issuer}
-                    </h3>
-                    <p className="font-mono text-xs text-muted-foreground">
+                    <h3 className="type-org leading-snug">{issuer}</h3>
+                    <p className="type-label mt-0.5">
                       {certs.length} credential{certs.length > 1 ? "s" : ""}
                     </p>
                   </div>
@@ -113,16 +111,14 @@ export async function CertificationsSection() {
                         className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1.5 px-5 py-4"
                       >
                         <div className="min-w-0 space-y-1">
-                          <h4 className="text-[15px] font-semibold leading-snug">
-                            {cert.name}
-                          </h4>
-                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                          <h4 className="type-subheading">{cert.name}</h4>
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 type-meta">
                             {cert.issueDate && (
                               <span>Issued {formatDate(cert.issueDate)}</span>
                             )}
                             {cert.expiryDate && (
                               <span
-                                className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 font-medium ${
+                                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 type-chip ${
                                   expired
                                     ? "bg-destructive/10 text-destructive"
                                     : "bg-emerald-600/10 text-emerald-700 dark:text-emerald-400"
@@ -137,8 +133,11 @@ export async function CertificationsSection() {
                               </span>
                             )}
                             {cert.credentialId && (
-                              <span className="font-mono">
-                                ID {cert.credentialId}
+                              <span className="min-w-0 wrap-anywhere">
+                                Credential ID{" "}
+                                <span className="font-mono text-xs">
+                                  {cert.credentialId}
+                                </span>
                               </span>
                             )}
                           </div>

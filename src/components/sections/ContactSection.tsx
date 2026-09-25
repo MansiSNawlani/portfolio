@@ -41,9 +41,7 @@ export async function ContactSection() {
           <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-8">
             {/* Contact Info */}
             <div className="@container/info space-y-6">
-              <h3 className="text-xl @md/info:text-2xl font-semibold mb-6">
-                Contact Information
-              </h3>
+              <h3 className="type-card-title mb-6">Contact Information</h3>
 
               {profile.email && (
                 <div className="flex items-start gap-3 @md/info:gap-4">
@@ -54,12 +52,12 @@ export async function ContactSection() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
+                    <h4 className="text-sm font-medium text-foreground mb-0.5">
                       Email
                     </h4>
                     <Link
                       href={`mailto:${profile.email}`}
-                      className="text-muted-foreground hover:text-primary transition-colors text-xs @md/info:text-sm truncate block"
+                      className="type-body hover:text-primary transition-colors wrap-anywhere"
                     >
                       {profile.email}
                     </Link>
@@ -76,12 +74,12 @@ export async function ContactSection() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
+                    <h4 className="text-sm font-medium text-foreground mb-0.5">
                       Phone
                     </h4>
                     <Link
                       href={`tel:${profile.phone}`}
-                      className="text-muted-foreground hover:text-primary transition-colors text-xs @md/info:text-sm"
+                      className="type-body hover:text-primary transition-colors"
                     >
                       {profile.phone}
                     </Link>
@@ -98,28 +96,24 @@ export async function ContactSection() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="font-semibold mb-1 text-sm @md/info:text-base">
+                    <h4 className="text-sm font-medium text-foreground mb-0.5">
                       Location
                     </h4>
-                    <p className="text-muted-foreground text-xs @md/info:text-sm">
-                      {profile.location}
-                    </p>
+                    <p className="type-body">{profile.location}</p>
                   </div>
                 </div>
               )}
 
               {profile.socialLinks && (
                 <div className="pt-6">
-                  <h4 className="font-semibold mb-4 text-sm @md/info:text-base">
-                    Elsewhere
-                  </h4>
+                  <h4 className="type-subheading mb-3">Elsewhere</h4>
                   <div className="flex flex-wrap gap-2 @md/info:gap-3">
                     {profile.socialLinks.github && (
                       <Link
                         href={profile.socialLinks.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm font-medium"
                       >
                         <IconBrandGithub
                           className="size-4"
@@ -133,7 +127,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm font-medium"
                       >
                         <IconBrandLinkedin
                           className="size-4"
@@ -147,7 +141,7 @@ export async function ContactSection() {
                         href={profile.socialLinks.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 py-1.5 @md/info:px-4 @md/info:py-2 rounded-lg border hover:bg-accent transition-colors text-xs @md/info:text-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border hover:bg-accent transition-colors text-sm font-medium"
                       >
                         <IconWorld className="size-4" aria-hidden="true" />
                         Website

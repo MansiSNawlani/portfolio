@@ -141,10 +141,48 @@
   html {
     @apply font-sans;
   }
-  h1,
-  h2,
-  h3 {
-    @apply font-heading;
-    letter-spacing: -0.025em;
-  }
+}
+
+/*
+ * Type roles. Every section uses these instead of ad-hoc size classes, so
+ * the same kind of text looks the same everywhere. Sizes follow the viewport
+ * (not card width) and body text never drops below 14px.
+ */
+@utility type-section-title {
+  @apply font-heading text-3xl md:text-4xl font-bold text-balance;
+  letter-spacing: -0.025em;
+}
+
+@utility type-section-subtitle {
+  @apply text-base md:text-lg text-muted-foreground text-pretty;
+}
+
+@utility type-card-title {
+  @apply font-heading text-lg md:text-xl font-semibold leading-snug text-balance;
+  letter-spacing: -0.015em;
+}
+
+@utility type-subheading {
+  @apply font-heading text-base md:text-lg font-semibold leading-snug;
+  letter-spacing: -0.01em;
+}
+
+@utility type-org {
+  @apply text-[15px] font-medium text-primary;
+}
+
+@utility type-body {
+  @apply text-[15px] md:text-base leading-relaxed text-muted-foreground text-pretty;
+}
+
+@utility type-meta {
+  @apply text-sm text-muted-foreground;
+}
+
+@utility type-chip {
+  @apply text-xs font-medium;
+}
+
+@utility type-label {
+  @apply text-xs text-muted-foreground;
 }

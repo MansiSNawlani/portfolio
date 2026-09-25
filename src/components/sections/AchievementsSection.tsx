@@ -133,7 +133,7 @@ export async function AchievementsSection() {
                 {featured.map((achievement) => (
                   <div
                     key={`${achievement.title}-${achievement.date}`}
-                    className="@container/card bg-card border rounded-lg p-6 hover:shadow-lg transition-all hover:scale-[1.02]"
+                    className="@container/card flex flex-col bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow"
                   >
                     {achievement.image && (
                       <div className="relative w-full h-32 @md/card:h-48 mb-4 rounded-lg overflow-hidden">
@@ -152,7 +152,7 @@ export async function AchievementsSection() {
                     <div className="flex flex-col items-start @xs/card:flex-row @xs/card:items-center gap-2 mb-3">
                       {achievement.type && (
                         <span
-                          className={`px-2.5 py-1 text-xs rounded-full font-medium ${getTypeColor(
+                          className={`px-2.5 py-1 type-chip rounded-full ${getTypeColor(
                             achievement.type,
                           )}`}
                         >
@@ -161,16 +161,16 @@ export async function AchievementsSection() {
                       )}
                       {achievement.date &&
                         achievement.occurrences.length === 1 && (
-                          <span className="text-xs @md/card:text-sm text-muted-foreground">
+                          <span className="type-meta">
                             {formatDate(achievement.date)}
                           </span>
                         )}
                     </div>
 
-                    <h4 className="text-lg @md/card:text-xl font-semibold mb-2">
+                    <h4 className="type-card-title mb-2">
                       {achievement.title}
                       {achievement.occurrences.length > 1 && (
-                        <span className="ml-2 align-middle text-xs font-mono font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                        <span className="ml-2 align-middle type-chip px-2 py-0.5 rounded-full bg-primary/10 text-primary">
                           ×{achievement.occurrences.length}
                         </span>
                       )}
@@ -178,17 +178,13 @@ export async function AchievementsSection() {
                     {achievement.occurrences.length > 1
                       ? renderOccurrences(
                           achievement,
-                          "mb-3 space-y-0.5 text-sm text-muted-foreground",
+                          "mb-3 space-y-0.5 type-meta",
                         )
                       : achievement.issuer && (
-                          <p className="text-primary font-medium mb-3 text-sm @md/card:text-base truncate">
-                            {achievement.issuer}
-                          </p>
+                          <p className="type-org mb-3">{achievement.issuer}</p>
                         )}
                     {achievement.description && (
-                      <p className="text-muted-foreground mb-4 text-sm @md/card:text-base line-clamp-3">
-                        {achievement.description}
-                      </p>
+                      <p className="type-body">{achievement.description}</p>
                     )}
 
                     {achievement.url && (
@@ -196,10 +192,13 @@ export async function AchievementsSection() {
                         href={achievement.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xs @md/card:text-sm text-primary hover:underline"
+                        className="mt-auto pt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
                       >
                         Learn More
-                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
+                        <IconExternalLink
+                          className="size-4"
+                          aria-hidden="true"
+                        />
                       </Link>
                     )}
                   </div>
@@ -217,7 +216,7 @@ export async function AchievementsSection() {
                 {regular.map((achievement) => (
                   <div
                     key={`${achievement.title}-${achievement.date}`}
-                    className="@container/card bg-card border rounded-lg p-6 hover:shadow-lg transition-all hover:scale-105 flex flex-col"
+                    className="@container/card bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow flex flex-col"
                   >
                     {achievement.image && (
                       <div className="relative w-full h-24 @md/card:h-32 mb-4 rounded-lg overflow-hidden">
@@ -237,7 +236,7 @@ export async function AchievementsSection() {
                       <div className="flex items-center gap-2 mb-3">
                         {achievement.type && (
                           <span
-                            className={`px-2 py-0.5 @md/card:py-1 text-xs rounded-full font-medium ${getTypeColor(
+                            className={`px-2.5 py-1 type-chip rounded-full ${getTypeColor(
                               achievement.type,
                             )}`}
                           >
@@ -246,10 +245,10 @@ export async function AchievementsSection() {
                         )}
                       </div>
 
-                      <h4 className="text-base @md/card:text-lg font-semibold mb-2 line-clamp-2">
+                      <h4 className="type-card-title mb-2">
                         {achievement.title}
                         {achievement.occurrences.length > 1 && (
-                          <span className="ml-2 align-middle text-xs font-mono font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                          <span className="ml-2 align-middle type-chip px-2 py-0.5 rounded-full bg-primary/10 text-primary">
                             ×{achievement.occurrences.length}
                           </span>
                         )}
@@ -257,26 +256,24 @@ export async function AchievementsSection() {
                       {achievement.occurrences.length > 1 ? (
                         renderOccurrences(
                           achievement,
-                          "mb-3 space-y-0.5 text-xs @md/card:text-sm text-muted-foreground",
+                          "mb-3 space-y-0.5 type-meta",
                         )
                       ) : (
                         <>
                           {achievement.issuer && (
-                            <p className="text-primary font-medium mb-2 text-xs @md/card:text-sm truncate">
+                            <p className="type-org mb-1">
                               {achievement.issuer}
                             </p>
                           )}
                           {achievement.date && (
-                            <p className="text-xs @md/card:text-sm text-muted-foreground mb-3">
+                            <p className="type-meta mb-3">
                               {formatDate(achievement.date)}
                             </p>
                           )}
                         </>
                       )}
                       {achievement.description && (
-                        <p className="text-xs @md/card:text-sm text-muted-foreground line-clamp-3">
-                          {achievement.description}
-                        </p>
+                        <p className="type-body">{achievement.description}</p>
                       )}
                     </div>
 
@@ -285,10 +282,13 @@ export async function AchievementsSection() {
                         href={achievement.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xs @md/card:text-sm text-primary hover:underline mt-4 pt-4 border-t"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline mt-4 pt-4 border-t"
                       >
                         Learn More
-                        <IconExternalLink className="w-3.5 h-3.5 @md/card:w-4 @md/card:h-4" />
+                        <IconExternalLink
+                          className="size-4"
+                          aria-hidden="true"
+                        />
                       </Link>
                     )}
                   </div>

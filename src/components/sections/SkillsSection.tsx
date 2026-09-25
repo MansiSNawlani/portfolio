@@ -65,10 +65,8 @@ export async function SkillsSection() {
                 )}
               >
                 <div className="space-y-1">
-                  <h3 className="text-lg font-semibold">{tier.title}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {tier.criteria}
-                  </p>
+                  <h3 className="type-card-title">{tier.title}</h3>
+                  <p className="type-meta">{tier.criteria}</p>
                 </div>
 
                 <ul className="flex flex-wrap gap-2">
@@ -89,9 +87,7 @@ export async function SkillsSection() {
                   ))}
                 </ul>
 
-                <p className="mt-auto font-mono text-xs text-muted-foreground">
-                  {tierSkills.length} skills
-                </p>
+                <p className="mt-auto type-label">{tierSkills.length} skills</p>
               </div>
             );
           })}

@@ -65,7 +65,7 @@ export async function HeroSection() {
           <div className="grid grid-cols-1 @3xl:grid-cols-2 gap-8 @lg:gap-12 items-center">
             {/* Text Content */}
             <div className="@container/hero space-y-4 @md/hero:space-y-6">
-              <h1 className="text-4xl @md/hero:text-5xl @lg/hero:text-7xl font-bold tracking-tight">
+              <h1 className="font-heading text-4xl @md/hero:text-5xl @lg/hero:text-7xl font-bold tracking-tight">
                 {profile.firstName}{" "}
                 <span className="text-primary">{profile.lastName}</span>
               </h1>
@@ -140,20 +140,20 @@ export async function HeroSection() {
                 )}
               </div>
 
-              <div className="grid grid-cols-1 @md/hero:grid-cols-2 gap-x-6 gap-y-2.5 pt-4 text-xs @md/hero:text-sm text-muted-foreground">
+              <div className="grid grid-cols-1 @md/hero:grid-cols-2 gap-x-6 gap-y-2.5 pt-4 type-meta">
                 {profile.email && (
                   <div className="flex items-start gap-2 min-w-0">
                     <Mail
-                      className="size-4 shrink-0 mt-px @md/hero:mt-0.5"
+                      className="size-4 shrink-0 mt-0.5"
                       aria-hidden="true"
                     />
-                    <span className="truncate">{profile.email}</span>
+                    <span className="wrap-anywhere">{profile.email}</span>
                   </div>
                 )}
                 {profile.location && (
                   <div className="flex items-start gap-2 min-w-0">
                     <MapPin
-                      className="size-4 shrink-0 mt-px @md/hero:mt-0.5"
+                      className="size-4 shrink-0 mt-0.5"
                       aria-hidden="true"
                     />
                     <span>{profile.location}</span>
@@ -162,7 +162,7 @@ export async function HeroSection() {
                 {profile.availability && (
                   <div className="flex items-start gap-2 min-w-0">
                     <CircleCheck
-                      className="size-4 shrink-0 mt-px @md/hero:mt-0.5 text-primary"
+                      className="size-4 shrink-0 mt-0.5 text-primary"
                       aria-hidden="true"
                     />
                     <span>
@@ -174,7 +174,7 @@ export async function HeroSection() {
                 {profile.workAuthorization && (
                   <div className="flex items-start gap-2 min-w-0">
                     <ShieldCheck
-                      className="size-4 shrink-0 mt-px @md/hero:mt-0.5 text-primary"
+                      className="size-4 shrink-0 mt-0.5 text-primary"
                       aria-hidden="true"
                     />
                     <span>{profile.workAuthorization}</span>
@@ -183,7 +183,7 @@ export async function HeroSection() {
                 {profile.languages && profile.languages.length > 0 && (
                   <div className="flex items-start gap-2 min-w-0 @md/hero:col-span-2">
                     <Languages
-                      className="size-4 shrink-0 mt-px @md/hero:mt-0.5"
+                      className="size-4 shrink-0 mt-0.5"
                       aria-hidden="true"
                     />
                     <span>
