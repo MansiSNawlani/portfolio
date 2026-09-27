@@ -460,6 +460,8 @@ export type Project = {
     | "other";
   liveUrl?: string;
   githubUrl?: string;
+  status?: "completed" | "in-progress";
+  startedAt?: string;
   featured?: boolean;
   order?: number;
 };
@@ -1356,7 +1358,7 @@ export type HERO_QUERY_RESULT =
 
 // Source: src/components/sections/ProjectsSection.tsx
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "project" && featured == true] | order(order asc)[0...6]{  title,  slug,  tagline,  category,  liveUrl,  githubUrl,  coverImage,  technologies[]->{name, category, color}}
+// Query: *[_type == "project" && featured == true] | order(order asc)[0...9]{  title,  slug,  tagline,  category,  liveUrl,  githubUrl,  status,  startedAt,  coverImage,  technologies[]->{name, category, color}}
 export type PROJECTS_QUERY_RESULT = Array<{
   title: string | null;
   slug: Slug | null;
@@ -1376,6 +1378,8 @@ export type PROJECTS_QUERY_RESULT = Array<{
     | null;
   liveUrl: string | null;
   githubUrl: string | null;
+  status: "completed" | "in-progress" | null;
+  startedAt: string | null;
   coverImage: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -1455,7 +1459,7 @@ declare module "@sanity/client" {
     '*[_type == "education"] | order(endDate desc, startDate desc){\n  institution,\n  degree,\n  fieldOfStudy,\n  startDate,\n  endDate,\n  current,\n  gpa,\n  description,\n  achievements,\n  logo,\n  website,\n  order\n}': EDUCATION_QUERY_RESULT;
     '*[_type == "experience"] | order(startDate desc){\n  company,\n  position,\n  employmentType,\n  location,\n  startDate,\n  endDate,\n  current,\n  description,\n  responsibilities,\n  achievements,\n  technologies[]->{name, category},\n  companyLogo,\n  companyWebsite\n}': EXPERIENCE_QUERY_RESULT;
     '*[_id == "singleton-profile"][0]{\n  firstName,\n  lastName,\n  headline,\n  headlineStaticText,\n  headlineAnimatedWords,\n  headlineAnimationDuration,\n  shortBio,\n  email,\n  phone,\n  location,\n  availability,\n  socialLinks,\n  yearsOfExperience,\n  profileImage,\n  workAuthorization,\n  languages,\n  "resumeUrl": resume.asset->url\n}': HERO_QUERY_RESULT;
-    '*[_type == "project" && featured == true] | order(order asc)[0...6]{\n  title,\n  slug,\n  tagline,\n  category,\n  liveUrl,\n  githubUrl,\n  coverImage,\n  technologies[]->{name, category, color}\n}': PROJECTS_QUERY_RESULT;
+    '*[_type == "project" && featured == true] | order(order asc)[0...9]{\n  title,\n  slug,\n  tagline,\n  category,\n  liveUrl,\n  githubUrl,\n  status,\n  startedAt,\n  coverImage,\n  technologies[]->{name, category, color}\n}': PROJECTS_QUERY_RESULT;
     '*[_type == "skill" && category != "soft-skills"] | order(yearsOfExperience desc, name asc){\n  _id,\n  name,\n  proficiency,\n  color\n}': SKILLS_QUERY_RESULT;
     '*[_type == "testimonial" && featured == true] | order(order asc){\n  name,\n  position,\n  company,\n  testimonial,\n  rating,\n  date,\n  avatar,\n  companyLogo,\n  linkedinUrl\n}': TESTIMONIALS_QUERY_RESULT;
   }

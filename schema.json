@@ -2786,6 +2786,30 @@
         },
         "optional": true
       },
+      "status": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "completed"
+            },
+            {
+              "type": "string",
+              "value": "in-progress"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "startedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "featured": {
         "type": "objectAttribute",
         "value": {

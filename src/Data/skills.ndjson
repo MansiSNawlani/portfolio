@@ -35,3 +35,8 @@
 {"_type":"skill","_id":"skill-agile","name":"Agile / Scrum","category":"soft-skills","proficiency":"expert","percentage":95,"yearsOfExperience":8,"color":"#0052CC"}
 {"_type":"skill","_id":"skill-problem-solving","name":"Problem Solving","category":"soft-skills","proficiency":"expert","percentage":96,"yearsOfExperience":8,"color":"#7B1FA2"}
 {"_type":"skill","_id":"skill-communication","name":"Communication","category":"soft-skills","proficiency":"expert","percentage":94,"yearsOfExperience":8,"color":"#0288D1"}
+{"_type":"skill","_id":"skill-python","name":"Python","category":"backend","proficiency":"intermediate","percentage":70,"yearsOfExperience":1,"color":"#3776AB"}
+{"_type":"skill","_id":"skill-fastapi","name":"FastAPI","category":"backend","proficiency":"intermediate","percentage":65,"yearsOfExperience":1,"color":"#009688"}
+{"_type":"skill","_id":"skill-postgresql","name":"PostgreSQL / PostGIS","category":"database","proficiency":"intermediate","percentage":65,"yearsOfExperience":1,"color":"#4169E1"}
+{"_type":"skill","_id":"skill-react-native","name":"React Native (Expo)","category":"mobile","proficiency":"beginner","percentage":55,"yearsOfExperience":1,"color":"#61DAFB"}
+{"_type":"skill","_id":"skill-rag","name":"RAG & Vector Search","category":"ai-ml","proficiency":"beginner","percentage":45,"yearsOfExperience":1,"color":"#F97316"}

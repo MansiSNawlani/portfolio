@@ -6,13 +6,15 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SectionHeading } from "./SectionHeading";
 
 const PROJECTS_QUERY =
-  defineQuery(`*[_type == "project" && featured == true] | order(order asc)[0...6]{
+  defineQuery(`*[_type == "project" && featured == true] | order(order asc)[0...9]{
   title,
   slug,
   tagline,
   category,
   liveUrl,
   githubUrl,
+  status,
+  startedAt,
   coverImage,
   technologies[]->{name, category, color}
 }`);
@@ -32,15 +34,21 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 // Employer projects link to the company's product page; a link to this site
-// (the portfolio project itself) is a live site you can visit.
-function liveLinkLabel(url: string) {
+// (the portfolio project itself) is a live site you can visit; a side project
+// with its own repo links to a deployed demo.
+function liveLinkLabel(url: string, hasRepo: boolean) {
   try {
-    return new URL(url).hostname.endsWith("mansisn.com")
-      ? "Visit site"
-      : "View product";
-  } catch {
-    return "View product";
-  }
+    if (new URL(url).hostname.endsWith("mansisn.com")) return "Visit site";
+  } catch {}
+  return hasRepo ? "View demo" : "View product";
+}
+
+function startedLabel(date: string) {
+  return `Since ${new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  })}`;
 }
 
 export async function ProjectsSection() {
@@ -55,7 +63,7 @@ export async function ProjectsSection() {
       <div className="container mx-auto max-w-6xl">
         <SectionHeading
           title="Projects"
-          description="Products I've helped build."
+          description="Products I've helped build, and what I'm building now."
         />
 
         <div className="@container">
@@ -96,6 +104,13 @@ export async function ProjectsSection() {
                             project.category}
                         </span>
                       )}
+                      {project.status === "in-progress" && (
+                        <span className="type-chip px-2 py-0.5 rounded-full border text-muted-foreground">
+                          In progress
+                          {project.startedAt &&
+                            ` · ${startedLabel(project.startedAt)}`}
+                        </span>
+                      )}
                     </div>
                     <h3 className="type-card-title mb-2">
                       {project.title || "Untitled Project"}
@@ -132,7 +147,7 @@ export async function ProjectsSection() {
                         rel="noopener noreferrer"
                         className="flex-1 text-center px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium"
                       >
-                        {liveLinkLabel(project.liveUrl)}
+                        {liveLinkLabel(project.liveUrl, !!project.githubUrl)}
                       </Link>
                     )}
                     {project.githubUrl && (

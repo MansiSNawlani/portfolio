@@ -87,6 +87,27 @@ export default defineType({
       description: "Link to the GitHub repository",
     }),
     defineField({
+      name: "status",
+      title: "Status",
+      type: "string",
+      options: {
+        list: [
+          { title: "Completed", value: "completed" },
+          { title: "In Progress", value: "in-progress" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "completed",
+    }),
+    defineField({
+      name: "startedAt",
+      title: "Started",
+      type: "date",
+      description:
+        "Shown as 'Since <month year>' while the project is in progress",
+      hidden: ({ parent }) => parent?.status !== "in-progress",
+    }),
+    defineField({
       name: "featured",
       title: "Featured Project",
       type: "boolean",
