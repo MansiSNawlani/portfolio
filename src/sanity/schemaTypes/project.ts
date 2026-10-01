@@ -43,7 +43,6 @@ export default defineType({
           description: "Describe the image for accessibility",
         },
       ],
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "technologies",
